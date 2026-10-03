@@ -1,0 +1,7 @@
+{
+  "name": "Aurora",
+  "description": "Everyday elegance, considered in Chennai — Boutique clothing and thoughtful wardrobe essentials.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

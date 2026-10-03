@@ -26,7 +26,7 @@ function Header() {
       <button className="icon-button mobile-only" aria-label="Open menu" onClick={() => setMenuOpen(true)}><Menu /></button>
       <nav className="desktop-nav"><Link href="#shop">Shop</Link><Link href="#story">Our story</Link><Link href="#journal">Journal</Link></nav>
       <Link href="/" className="wordmark">[ AURORA ]</Link>
-      <div className="header-actions"><button className="icon-button" aria-label="Search"><Search /></button><button className="icon-button desktop-only" aria-label="Wishlist"><Heart /></button><button className="icon-button" aria-label="Shopping bag"><ShoppingBag /><sup>0</sup></button></div>
+      <div className="header-actions"><button className="icon-button" aria-label="Search"><Search /></button><Link className="icon-button desktop-only" href="/wishlist" aria-label="Wishlist"><Heart /></Link><Link className="icon-button" href="/cart" aria-label="Shopping bag"><ShoppingBag /><sup>0</sup></Link></div>
     </header>
     {menuOpen && <div className="mobile-menu"><button className="close-menu" onClick={() => setMenuOpen(false)} aria-label="Close menu"><X /></button><span className="eyebrow">Navigate</span><Link href="#shop" onClick={() => setMenuOpen(false)}>Shop all</Link><Link href="#shop" onClick={() => setMenuOpen(false)}>New arrivals</Link><Link href="#story" onClick={() => setMenuOpen(false)}>Our story</Link><Link href="#journal" onClick={() => setMenuOpen(false)}>Journal</Link></div>}
   </>
@@ -35,7 +35,7 @@ function Header() {
 function ProductCard({ product, large = false }: { product: typeof products[number], large?: boolean }) {
   const [liked, setLiked] = useState(false)
   return <article className={`product-card ${large ? 'product-card-large' : ''}`}>
-    <div className="product-image"><Image src={product.image} alt={product.name} fill sizes={large ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 50vw, 25vw'} /><span className="product-tag">{product.tag}</span><button className="wishlist-button" aria-label={`Add ${product.name} to wishlist`} onClick={() => setLiked(!liked)}><Heart fill={liked ? 'currentColor' : 'none'} /></button></div>
+    <div className="product-image"><Link href={product.name === 'The Linen Blazer' ? '/product/the-linen-blazer' : `/product?item=${encodeURIComponent(product.name.toLowerCase().replaceAll(' ', '-'))}`} aria-label={`View ${product.name}`}><Image src={product.image} alt={product.name} fill sizes={large ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 50vw, 25vw'} /></Link><span className="product-tag">{product.tag}</span><button className="wishlist-button" aria-label={`Add ${product.name} to wishlist`} onClick={() => setLiked(!liked)}><Heart fill={liked ? 'currentColor' : 'none'} /></button></div>
     <div className="product-meta"><div><h3>{product.name}</h3><p>Chennai studio / 01</p></div><strong>{product.price}</strong></div>
   </article>
 }

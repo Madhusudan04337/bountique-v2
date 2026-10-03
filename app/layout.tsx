@@ -2,6 +2,7 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import './contact/contact.css'
+import { SiteFooter } from '@/components/site-footer'
 
 export const metadata: Metadata = {
   title: 'Aurora — Everyday elegance, considered in Chennai',
@@ -43,6 +44,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         {children}
+        <SiteFooter />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

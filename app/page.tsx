@@ -6,16 +6,16 @@ import { useState } from 'react'
 import { ArrowRight, ChevronDown, Heart, Menu, Search, ShoppingBag, Sparkles, X } from 'lucide-react'
 
 const products = [
-  { name: 'The Linen Blazer', price: '₹6,499', image: '/images/linen-fashion.png', tag: 'Bestseller' },
-  { name: 'The Column Dress', price: '₹4,999', image: '/images/editorial-fashion.png', tag: 'New in' },
-  { name: 'The Everyday Shirt', price: '₹3,499', image: '/images/linen-fashion.png', tag: 'Essential' },
-  { name: 'The Pleat Trouser', price: '₹4,299', image: '/images/lookbook-fashion.png', tag: 'New in' },
+  { name: 'The Linen Blazer', price: '₹6,499', image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=85', tag: 'Bestseller' },
+  { name: 'The Column Dress', price: '₹4,999', image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1200&q=85', tag: 'New in' },
+  { name: 'The Everyday Shirt', price: '₹3,499', image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=85', tag: 'Essential' },
+  { name: 'The Pleat Trouser', price: '₹4,299', image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85', tag: 'New in' },
 ]
 
 const categories = [
-  { name: 'Women', image: '/images/editorial-fashion.png' },
-  { name: 'Festive & Ethnic', image: '/images/editorial-fashion.png' },
-  { name: 'Accessories', image: '/images/lookbook-fashion.png' },
+  { name: 'Women', image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1200&q=85' },
+  { name: 'Festive & Ethnic', image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1200&q=85' },
+  { name: 'Accessories', image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85' },
 ]
 
 function Header() {
@@ -46,7 +46,7 @@ export default function Page() {
   return <main>
     <Header />
     <section className="hero">
-      <Image src="/images/hero-fashion.png" alt="Aurora summer edit model in soft tailoring" fill priority sizes="100vw" className="hero-image" />
+      <Image src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=85" alt="Aurora summer edit model in soft tailoring" fill priority sizes="100vw" className="hero-image" />
       <div className="hero-overlay" />
       <div className="hero-copy"><span className="eyebrow light">Summer edit / 2026</span><h1>Essential<br /><em>summer</em> edit</h1><p>Quiet forms. Considered textiles.<br />Made for all-day elegance.</p><Link href="/collection" className="button button-light">Explore the collection <ArrowRight /></Link></div>
       <div className="hero-bottom"><span>Scroll to discover</span><span className="scroll-line" /><span>01 / 04</span></div>
@@ -54,9 +54,9 @@ export default function Page() {
     <section className="trust-bar"><div><Sparkles /><span><b>Made in Chennai</b><small>Thoughtful, local production</small></span></div><div><span className="trust-mark">↗</span><span><b>Easy returns</b><small>14 days, no questions asked</small></span></div><div><span className="trust-mark">○</span><span><b>Slow fashion</b><small>Quality over quantity</small></span></div></section>
     <section className="section category-section" id="shop"><div className="section-heading"><div><span className="eyebrow">01 / Curated categories</span><h2>Shop by category</h2></div><Link href="/collection" className="text-link">View all <ArrowRight /></Link></div><div className="category-grid">{categories.map((category) => <Link className="category-card" href="/collection" key={category.name}><Image src={category.image} alt={category.name} fill sizes="(max-width: 768px) 33vw, 33vw" /><span>{category.name}</span><ArrowRight /></Link>)}</div></section>
     <section className="section fresh-section" id="fresh"><div className="section-heading"><div><span className="eyebrow">02 / Current drops</span><h2>Fresh arrivals</h2></div><Link href="/collection/new-arrivals" className="filter-link">View all arrivals <ArrowRight /></Link></div><div className="tabs">{tabs.map(tab => <button key={tab} className={activeTab === tab ? 'active' : ''} onClick={() => setActiveTab(tab)}>{tab}</button>)}</div><div className="product-grid"><div className="product-card-link"><ProductCard product={products[0]} large /></div><div className="product-stack"><ProductCard product={products[1]} /><ProductCard product={products[2]} /><ProductCard product={products[3]} /><ProductCard product={products[1]} /></div></div></section>
-    <section className="editorial-banner"><div className="editorial-image"><Image src="/images/editorial-portrait.png" alt="Model wearing Aurora linen tailoring" fill sizes="(max-width: 768px) 100vw, 50vw" /></div><div className="editorial-copy"><span className="eyebrow">03 / The linen edit</span><h2>The Linen<br /><em>Edit.</em></h2><p>Effortless pieces designed for the golden hour of summer.</p><Link href="/collection" className="text-link">Shop the edit <ArrowRight /></Link></div></section>
-    <section className="section story-section" id="story"><div className="story-image"><Image src="/images/linen-fashion.png" alt="Soft tailoring detail" fill sizes="(max-width: 768px) 100vw, 50vw" /></div><div className="story-copy"><span className="eyebrow">04 / Our point of view</span><h2>Clothes with<br /><em>a point of view.</em></h2><p>Aurora is a study in the everyday. A wardrobe of intelligent silhouettes, natural textures and easy confidence, designed in Chennai and made to move with you.</p><p>We believe getting dressed should feel like a small act of self-expression — never a compromise.</p><Link href="/story" className="text-link">Read our story <ArrowRight /></Link></div></section>
-    <section className="lookbook" id="journal"><div className="lookbook-heading"><span className="eyebrow">05 / The lookbook</span><h2>Quiet confidence,<br /><em>in every frame.</em></h2><p>Discover the pieces that make an entrance without trying.</p></div><div className="lookbook-images"><Image src="/images/lookbook-fashion.png" alt="Monochrome Aurora look" width={520} height={650} /><Image src="/images/editorial-fashion.png" alt="Aurora atelier look" width={420} height={520} /></div></section>
+    <section className="editorial-banner"><div className="editorial-image"><Image src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1200&q=85" alt="Model wearing Aurora linen tailoring" fill sizes="(max-width: 768px) 100vw, 50vw" /></div><div className="editorial-copy"><span className="eyebrow">03 / The linen edit</span><h2>The Linen<br /><em>Edit.</em></h2><p>Effortless pieces designed for the golden hour of summer.</p><Link href="/collection" className="text-link">Shop the edit <ArrowRight /></Link></div></section>
+    <section className="section story-section" id="story"><div className="story-image"><Image src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=85" alt="Soft tailoring detail" fill sizes="(max-width: 768px) 100vw, 50vw" /></div><div className="story-copy"><span className="eyebrow">04 / Our point of view</span><h2>Clothes with<br /><em>a point of view.</em></h2><p>Aurora is a study in the everyday. A wardrobe of intelligent silhouettes, natural textures and easy confidence, designed in Chennai and made to move with you.</p><p>We believe getting dressed should feel like a small act of self-expression — never a compromise.</p><Link href="/story" className="text-link">Read our story <ArrowRight /></Link></div></section>
+    <section className="lookbook" id="journal"><div className="lookbook-heading"><span className="eyebrow">05 / The lookbook</span><h2>Quiet confidence,<br /><em>in every frame.</em></h2><p>Discover the pieces that make an entrance without trying.</p></div><div className="lookbook-images"><Image src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85" alt="Monochrome Aurora look" width={520} height={650} /><Image src="https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1200&q=85" alt="Aurora atelier look" width={420} height={520} /></div></section>
     <section className="newsletter"><span className="eyebrow">The Aurora letter</span><h2>15% off your first order.</h2><p>Notes on new collections, early access and stories from the studio.</p><form><input type="email" placeholder="Your email address" aria-label="Your email address" /><button type="submit">Subscribe <ArrowRight /></button></form></section>
   </main>
 }

@@ -26,7 +26,7 @@ function Header() {
       <button className="icon-button mobile-only" aria-label="Open menu" onClick={() => setMenuOpen(true)}><Menu /></button>
       <nav className="desktop-nav"><Link href="/collection">Shop</Link><Link href="/story">Our story</Link><Link href="/journal">Journal</Link></nav>
       <Link href="/" className="wordmark">[ AURORA ]</Link>
-      <div className="header-actions"><button className="icon-button" aria-label="Search"><Search /></button><Link className="icon-button desktop-only" href="/wishlist" aria-label="Wishlist"><Heart /></Link><Link className="icon-button" href="/cart" aria-label="Shopping bag"><ShoppingBag /><sup>0</sup></Link></div>
+      <div className="header-actions"><button className="icon-button" aria-label="Search"><Search /></button><Link className="icon-button desktop-only" href="/wishlist" aria-label="Wishlist"><Heart /></Link><Link className="icon-button" href="/cart" aria-label="Shopping bag, 0 items"><ShoppingBag aria-hidden="true" /><sup aria-label="0 items">0</sup></Link></div>
     </header>
     {menuOpen && <div className="mobile-menu"><button className="close-menu" onClick={() => setMenuOpen(false)} aria-label="Close menu"><X /></button><span className="eyebrow">Navigate</span><Link href="/collection" onClick={() => setMenuOpen(false)}>Shop all</Link><Link href="/collection/new-arrivals" onClick={() => setMenuOpen(false)}>New arrivals</Link><Link href="/story" onClick={() => setMenuOpen(false)}>Our story</Link><Link href="/journal" onClick={() => setMenuOpen(false)}>Journal</Link></div>}
   </>

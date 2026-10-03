@@ -24,11 +24,11 @@ function Header() {
     <div className="announcement">Complimentary shipping on orders over ₹3,000 <span>·</span> Chennai, India</div>
     <header className="site-header">
       <button className="icon-button mobile-only" aria-label="Open menu" onClick={() => setMenuOpen(true)}><Menu /></button>
-      <nav className="desktop-nav"><Link href="/collection">Shop</Link><Link href="/story">Our story</Link><Link href="/journal">Journal</Link></nav>
+      <nav className="desktop-nav"><Link href="/collection">Shop</Link><Link href="/story">Our story</Link><Link href="/journal">Journal</Link><Link href="/contact">Contact us</Link></nav>
       <Link href="/" className="wordmark">[ AURORA ]</Link>
       <div className="header-actions"><button className="icon-button" aria-label="Search"><Search /></button><Link className="icon-button desktop-only" href="/wishlist" aria-label="Wishlist"><Heart /></Link><Link className="icon-button" href="/cart" aria-label="Shopping bag, 0 items"><ShoppingBag aria-hidden="true" /><sup aria-label="0 items">0</sup></Link></div>
     </header>
-    {menuOpen && <div className="mobile-menu"><button className="close-menu" onClick={() => setMenuOpen(false)} aria-label="Close menu"><X /></button><span className="eyebrow">Navigate</span><Link href="/collection" onClick={() => setMenuOpen(false)}>Shop all</Link><Link href="/collection/new-arrivals" onClick={() => setMenuOpen(false)}>New arrivals</Link><Link href="/story" onClick={() => setMenuOpen(false)}>Our story</Link><Link href="/journal" onClick={() => setMenuOpen(false)}>Journal</Link></div>}
+    {menuOpen && <div className="mobile-menu"><button className="close-menu" onClick={() => setMenuOpen(false)} aria-label="Close menu"><X /></button><span className="eyebrow">Navigate</span><Link href="/collection" onClick={() => setMenuOpen(false)}>Shop all</Link><Link href="/collection/new-arrivals" onClick={() => setMenuOpen(false)}>New arrivals</Link><Link href="/story" onClick={() => setMenuOpen(false)}>Our story</Link><Link href="/journal" onClick={() => setMenuOpen(false)}>Journal</Link><Link href="/contact" onClick={() => setMenuOpen(false)}>Contact us</Link></div>}
   </>
 }
 

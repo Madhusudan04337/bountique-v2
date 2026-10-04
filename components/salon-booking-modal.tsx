@@ -54,7 +54,7 @@ export function SalonBookingModal() {
               initial={{ scale: 0.95, opacity: 0, y: 12 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 12 }}
-              className="relative z-10 w-full max-w-2xl bg-[#201f1c] border border-[#3b3832] text-[#f4efe9] rounded-2xl overflow-hidden shadow-2xl"
+              className="relative z-10 w-full max-w-2xl bg-[#201f1c] border border-[#3b3832] text-[#f4efe9] rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
             >
               {/* Header Visual */}
               <div className="relative h-44 w-full bg-[#181716] overflow-hidden">

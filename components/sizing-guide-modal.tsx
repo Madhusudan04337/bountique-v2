@@ -108,7 +108,7 @@ export function SizingGuideModal({
               initial={{ scale: 0.95, opacity: 0, y: 14 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 14 }}
-              className="relative z-10 w-full max-w-2xl bg-[#201f1c] border border-[#3b3832] text-[#f4efe9] rounded-3xl overflow-hidden shadow-2xl p-6 sm:p-8 space-y-6"
+              className="relative z-10 w-full max-w-2xl bg-[#201f1c] border border-[#3b3832] text-[#f4efe9] rounded-3xl shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto"
             >
               {/* Header */}
               <div className="flex justify-between items-start border-b border-[#2e2c28] pb-4">

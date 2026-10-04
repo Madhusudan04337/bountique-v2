@@ -85,8 +85,12 @@ export function ShopTheLookSection() {
   }
 
   return (
-    <section className="py-24 bg-[#191817] border-y border-[#2a2825]" aria-labelledby="lookbook-heading">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-28 bg-[#191817] relative overflow-hidden" aria-labelledby="lookbook-heading">
+      {/* Organic Ambient Light Blob */}
+      <div className="absolute top-1/3 right-10 w-[550px] h-[550px] bg-[#c9b293]/6 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-[#c9b293]/4 rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header with Lookbook Navigation */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 gap-6">
           <div className="space-y-2">
@@ -107,41 +111,43 @@ export function ShopTheLookSection() {
             </p>
           </div>
 
-          {/* Look Switcher Tabs */}
-          <div
-            className="flex flex-wrap sm:flex-nowrap gap-2 p-1.5 bg-[#201f1c] rounded-full border border-[#36342e] w-fit shadow-xl relative z-20"
-            role="tablist"
-            aria-label="Lookbook Outfits"
-          >
-            {styledLooks.map((look, idx) => {
-              const isActive = activeLookIndex === idx
-              const shortInfo = lookShortNames[idx] || { title: `Look 0${idx + 1}`, pieces: '', code: `LOOK #0${idx + 1}` }
+          {/* Look Switcher Tabs (Responsive Swipeable Track) */}
+          <div className="w-full sm:w-auto overflow-x-auto pb-1 scrollbar-none">
+            <div
+              className="flex flex-nowrap gap-1.5 sm:gap-2 p-1.5 bg-[#201f1c] rounded-full border border-[#36342e] w-fit shadow-xl relative z-20 shrink-0"
+              role="tablist"
+              aria-label="Lookbook Outfits"
+            >
+              {styledLooks.map((look, idx) => {
+                const isActive = activeLookIndex === idx
+                const shortInfo = lookShortNames[idx] || { title: `Look 0${idx + 1}`, pieces: '', code: `LOOK #0${idx + 1}` }
 
-              return (
-                <button
-                  key={look.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  onClick={() => {
-                    setActiveLookIndex(idx)
-                    setActiveHotspot(null)
-                    setIsZoomed(false)
-                  }}
-                  className={`px-4 sm:px-5 py-2.5 text-xs font-mono rounded-full transition-all cursor-pointer flex items-center gap-2 select-none ${
-                    isActive
-                      ? 'border-[#c9b293] bg-[#c9b293] text-[#181716] font-semibold shadow-[0_0_20px_rgba(201,178,147,0.35)] scale-[1.02]'
-                      : 'border-transparent text-[#a7a297] hover:text-white hover:bg-[#282723]'
-                  }`}
-                >
-                  <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-[#181716]' : 'bg-[#c9b293]'}`} />
-                  <span className="font-semibold tracking-wider">{shortInfo.code}</span>
-                  <span className={`hidden sm:inline text-[11px] font-normal ${isActive ? 'text-[#181716]' : 'text-[#7e7970]'}`}>
-                    · {shortInfo.title}
-                  </span>
-                </button>
-              )
-            })}
+                return (
+                  <button
+                    key={look.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    onClick={() => {
+                      setActiveLookIndex(idx)
+                      setActiveHotspot(null)
+                      setIsZoomed(false)
+                    }}
+                    className={`px-3.5 sm:px-5 py-2 sm:py-2.5 text-xs font-mono rounded-full transition-all cursor-pointer flex items-center gap-1.5 sm:gap-2 select-none shrink-0 ${
+                      isActive
+                        ? 'border-[#c9b293] bg-[#c9b293] text-[#181716] font-semibold shadow-[0_0_20px_rgba(201,178,147,0.35)] scale-[1.02]'
+                        : 'border-transparent text-[#a7a297] hover:text-white hover:bg-[#282723]'
+                    }`}
+                  >
+                    <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-[#181716]' : 'bg-[#c9b293]'}`} />
+                    <span className="font-semibold tracking-wider">{shortInfo.code}</span>
+                    <span className={`hidden md:inline text-[11px] font-normal ${isActive ? 'text-[#181716]' : 'text-[#7e7970]'}`}>
+                      · {shortInfo.title}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
           </div>
         </div>
 
@@ -150,7 +156,7 @@ export function ShopTheLookSection() {
           {/* Visual with Hotspots */}
           <div
             ref={canvasRef}
-            className="lg:col-span-7 relative w-full h-[540px] sm:h-[680px] bg-[#1a1917] rounded-[3rem] overflow-hidden border border-[#35332e] shadow-2xl group select-none"
+            className="lg:col-span-7 relative w-full h-[400px] sm:h-[540px] lg:h-[660px] bg-[#1a1917] rounded-[2.5rem] sm:rounded-[3rem] overflow-hidden border border-[#35332e] shadow-2xl group select-none"
             onClick={(e) => {
               // Close hotspot if clicked directly on canvas background
               if (e.target === canvasRef.current || (e.target as HTMLElement).tagName === 'IMG') {
@@ -324,7 +330,7 @@ export function ShopTheLookSection() {
                           exit={{ opacity: 0, scale: 0.9, y: 8 }}
                           transition={{ duration: 0.2 }}
                           onClick={(e) => e.stopPropagation()}
-                          className="absolute left-8 -top-16 w-72 p-4 bg-[#1b1a18]/95 border border-[#444038] backdrop-blur-xl rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-40"
+                          className="absolute left-2 sm:left-8 -top-16 w-64 sm:w-72 max-w-[80vw] p-3.5 sm:p-4 bg-[#1b1a18]/95 border border-[#444038] backdrop-blur-xl rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-40"
                         >
                           {/* Card Header with Close Icon */}
                           <div className="flex justify-between items-start mb-3">
@@ -586,7 +592,7 @@ export function ShopTheLookSection() {
               <button
                 type="button"
                 onClick={handleAddCustomBundleToCart}
-                className={`w-full py-4 font-mono text-xs uppercase tracking-widest font-semibold rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg ${
+                className={`w-full py-2.5 sm:py-3 px-4 font-mono text-[11px] sm:text-xs uppercase tracking-wider font-semibold rounded-full flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md active:scale-98 ${
                   justAddedBundle
                     ? 'bg-[#55e08b] text-[#181716]'
                     : 'bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716]'
@@ -594,13 +600,13 @@ export function ShopTheLookSection() {
               >
                 {justAddedBundle ? (
                   <>
-                    <Check className="w-4 h-4" />
-                    <span>Ensemble Added to Bag! (LOOK10 Applied)</span>
+                    <Check className="w-3.5 h-3.5" />
+                    <span>Ensemble Added to Bag! (LOOK10)</span>
                   </>
                 ) : (
                   <>
-                    <ShoppingBag className="w-4 h-4" />
-                    <span>Add Complete Look ({bundledProducts.length} Pieces) to Bag</span>
+                    <ShoppingBag className="w-3.5 h-3.5" />
+                    <span>Add Complete Look ({bundledProducts.length} Pieces)</span>
                   </>
                 )}
               </button>

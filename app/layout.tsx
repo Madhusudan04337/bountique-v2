@@ -10,6 +10,7 @@ import { ProvenanceModal } from '@/components/provenance-modal'
 import { VipStylistDrawer } from '@/components/vip-stylist-drawer'
 import { FloatingVipStylist } from '@/components/floating-vip-stylist'
 import { ReadingProgress } from '@/components/reading-progress'
+import { MobileNav } from '@/components/mobile-nav'
 import { SiteFooter } from '@/components/site-footer'
 
 export const metadata: Metadata = {
@@ -57,7 +58,8 @@ export default function RootLayout({
           <VipStylistDrawer />
           <FloatingVipStylist />
           <ToastNotification />
-          <div className="flex-1">{children}</div>
+          <div className="flex-1 pb-16 md:pb-0">{children}</div>
+          <MobileNav />
           <SiteFooter />
         </StoreProvider>
       </body>

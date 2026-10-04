@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
 :root {
-  /* Warm Dark Espresso Palette — organic, deep, and tactile */
+  /* Warm Dark Espresso & Atelier Linen Palette */
   --bg-canvas: #181716;
   --bg-surface: #21201d;
   --bg-surface-elevated: #282723;
@@ -15,8 +15,9 @@
   --accent-linen: #c9b293;
   --accent-light: #dfcaa8;
 
+  /* Typography System */
   --font-heading: 'Playfair Display', Georgia, serif;
-  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'DM Mono', monospace;
   --ease-smooth: cubic-bezier(0.19, 1, 0.22, 1);
 }
@@ -38,7 +39,8 @@ body {
   color: var(--text-primary);
   font-family: var(--font-body);
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.65;
+  letter-spacing: -0.011em;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -62,8 +64,8 @@ body {
 
 /* Subtle Organic Text Selection */
 ::selection {
-  background: rgba(201, 178, 147, 0.25);
-  color: #fff;
+  background: rgba(201, 178, 147, 0.3);
+  color: #ffffff;
 }
 
 a {
@@ -77,17 +79,23 @@ button {
 }
 
 input, select, textarea {
-  font: inherit;
+  font-family: var(--font-body);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   font-weight: 400;
   margin: 0;
+  text-wrap: balance;
 }
 
-/* Organic Sculpted Forms (replacing rigid boxes and rectangles) */
+/* Readable Paragraph Width Container */
+.prose-readable {
+  max-width: 65ch;
+}
+
+/* Organic Sculpted Forms */
 .organic-arch {
   border-radius: 4.5rem 4.5rem 1.5rem 1.5rem;
 }

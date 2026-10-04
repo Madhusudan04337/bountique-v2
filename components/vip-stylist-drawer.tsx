@@ -43,13 +43,13 @@ export function VipStylistDrawer() {
             className="fixed inset-0 bg-black/70 backdrop-blur-sm cursor-pointer"
           />
 
-          <div className="fixed inset-y-0 right-0 flex max-w-full pl-6">
+          <div className="fixed inset-y-0 right-0 flex max-w-full pl-0 sm:pl-6">
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="w-screen max-w-md bg-[#1e1d1a] border-l border-[#33312c] text-[#f4efe9] flex flex-col shadow-2xl justify-between"
+              className="w-screen max-w-md bg-[#1e1d1a] border-l border-[#33312c] text-[#f4efe9] flex flex-col shadow-2xl justify-between overflow-y-auto max-h-screen"
             >
               <div>
                 {/* Header */}

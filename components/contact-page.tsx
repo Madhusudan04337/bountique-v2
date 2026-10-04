@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { Check } from 'lucide-react'
+import { Check, Mail, Phone, MapPin, Sparkles, ArrowRight } from 'lucide-react'
 import { useStore } from '@/lib/store'
 
 export function ContactPage() {
@@ -20,111 +20,140 @@ export function ContactPage() {
   }
 
   return (
-    <main className="bg-[#181716] text-[#f4efe9] min-h-screen py-14 sm:py-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        {/* Page H1 */}
-        <div className="pb-8 border-b border-[#292724] mb-12">
-          <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#c9b293] block mb-1">
-            Care &amp; Inquiries
-          </span>
-          <h1 className="text-4xl sm:text-5xl font-serif text-[#f4efe9]">
-            Contact the studio
+    <main className="bg-[#181716] text-[#f4efe9] min-h-screen py-16 sm:py-24 selection:bg-[#c9b293] selection:text-[#181716]">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Page Header */}
+        <div className="pb-10 border-b border-[#2d2b27] mb-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#201f1c] border border-[#38352f] text-[10px] font-mono uppercase tracking-[0.24em] text-[#c9b293] mb-4">
+            <Sparkles className="w-3 h-3" />
+            <span>Private Clienteling &amp; Care</span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-[#f4efe9] leading-tight">
+            Contact the <em>atelier.</em>
           </h1>
-          <p className="text-sm font-sans text-[#a7a299] mt-2">
-            Questions regarding sizing, fabric, or visiting our Chennai salon.
+          <p className="text-sm sm:text-base font-sans text-[#a7a297] mt-3 max-w-xl leading-relaxed prose-readable">
+            Personal guidance regarding sizing, bespoke hemline alterations, textile care, or scheduling your private salon visit.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Inquiry Form Section (H2) */}
-          <section className="p-6 sm:p-8 bg-[#201f1c] border border-[#2f2d29] rounded-3xl" aria-labelledby="inquiry-form-heading">
-            <h2 id="inquiry-form-heading" className="text-xs font-mono uppercase tracking-wider text-[#c9b293] mb-4">
-              Send an Inquiry
+          <section className="lg:col-span-7 p-6 sm:p-10 bg-gradient-to-b from-[#21201d] to-[#1c1b18] border border-[#38352f] rounded-[2.5rem] shadow-2xl" aria-labelledby="inquiry-form-heading">
+            <h2 id="inquiry-form-heading" className="text-xs font-mono uppercase tracking-[0.2em] text-[#c9b293] mb-6 block">
+              Send a Private Note
             </h2>
 
             {submitted ? (
-              <div className="text-center py-8 space-y-3">
-                <div className="w-10 h-10 rounded-full bg-[#c9b293]/15 text-[#c9b293] flex items-center justify-center mx-auto">
-                  <Check className="w-5 h-5" />
+              <div className="text-center py-12 space-y-4 animate-in fade-in">
+                <div className="w-12 h-12 rounded-full bg-[#c9b293]/15 text-[#c9b293] flex items-center justify-center mx-auto border border-[#c9b293]/30">
+                  <Check className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg font-serif text-white">Thank you, {name}</h3>
-                <p className="text-xs font-sans text-[#a7a299]">
-                  We will reply to your note within one business day.
+                <h3 className="text-2xl font-serif text-white">Thank you, {name}</h3>
+                <p className="text-sm font-sans text-[#a7a297] max-w-sm mx-auto leading-relaxed">
+                  Our senior concierge will respond to your inquiry via email within one business day.
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4 text-xs font-mono">
+              <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
-                  <label className="text-[#a7a299] block mb-1">Client Name</label>
+                  <label className="text-xs font-mono uppercase tracking-wider text-[#a7a297] block mb-2">
+                    Client Full Name
+                  </label>
                   <input
                     type="text"
                     required
+                    placeholder="e.g. Priya Sundaram"
                     value={name}
                     onChange={e => setName(e.target.value)}
-                    className="w-full p-3 bg-[#181716] border border-[#33312c] text-white rounded-xl focus:outline-none focus:border-[#c9b293]"
+                    className="w-full p-3.5 bg-[#181716] border border-[#36342e] text-white text-sm rounded-xl focus:outline-none focus:border-[#c9b293] placeholder:text-[#68645c]"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[#a7a299] block mb-1">Email Address</label>
+                  <label className="text-xs font-mono uppercase tracking-wider text-[#a7a297] block mb-2">
+                    Email Address
+                  </label>
                   <input
                     type="email"
                     required
+                    placeholder="client@domain.com"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    className="w-full p-3 bg-[#181716] border border-[#33312c] text-white rounded-xl focus:outline-none focus:border-[#c9b293]"
+                    className="w-full p-3.5 bg-[#181716] border border-[#36342e] text-white text-sm rounded-xl focus:outline-none focus:border-[#c9b293] placeholder:text-[#68645c]"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[#a7a299] block mb-1">Message</label>
+                  <label className="text-xs font-mono uppercase tracking-wider text-[#a7a297] block mb-2">
+                    Inquiry Details
+                  </label>
                   <textarea
                     required
                     rows={4}
                     value={message}
                     onChange={e => setMessage(e.target.value)}
-                    placeholder="Tell us what you need assistance with..."
-                    className="w-full p-3 bg-[#181716] border border-[#33312c] text-white rounded-xl focus:outline-none focus:border-[#c9b293] font-sans"
+                    placeholder="How may our atelier assist you? (e.g. Fit consultation, bespoke request, appointment)"
+                    className="w-full p-3.5 bg-[#181716] border border-[#36342e] text-white text-sm rounded-xl focus:outline-none focus:border-[#c9b293] font-sans leading-relaxed placeholder:text-[#68645c]"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-semibold uppercase tracking-wider rounded-full transition-colors"
+                  className="w-full py-4 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-mono text-xs font-semibold uppercase tracking-[0.2em] rounded-full transition-all duration-300 hover:scale-[1.01] shadow-lg cursor-pointer"
                 >
-                  Send Message
+                  Send Inquiry Note
                 </button>
               </form>
             )}
           </section>
 
           {/* Salon Details Section (H2 -> H3) */}
-          <section className="space-y-6 text-xs font-sans text-[#a7a299]" aria-labelledby="salon-details-heading">
-            <h2 id="salon-details-heading" className="text-xs font-mono uppercase tracking-wider text-[#c9b293]">
-              Flagship Salon &amp; Concierge
-            </h2>
-
-            <div className="space-y-1">
-              <h3 className="text-sm font-serif text-white block">Email Concierge</h3>
-              <p className="font-mono text-[#c9b293]">hello@aurorastudio.in</p>
+          <section className="lg:col-span-5 space-y-8 text-sm font-sans text-[#a7a297]" aria-labelledby="salon-details-heading">
+            <div>
+              <span className="text-[10px] font-mono uppercase tracking-[0.24em] text-[#c9b293] block mb-2">
+                Atelier Location
+              </span>
+              <h2 id="salon-details-heading" className="text-2xl sm:text-3xl font-serif text-white">
+                Flagship Salon &amp; Concierge
+              </h2>
             </div>
 
-            <div className="space-y-1">
-              <h3 className="text-sm font-serif text-white block">Studio Telephone</h3>
-              <p className="font-mono text-[#c9b293]">+91 44 2833 4900</p>
+            <div className="space-y-6">
+              <div className="p-5 bg-[#201f1c] border border-[#33312c] rounded-2xl space-y-1.5">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#c9b293]">
+                  <Mail className="w-3.5 h-3.5" />
+                  <span>Email Concierge</span>
+                </div>
+                <p className="font-mono text-white text-sm">hello@aurorastudio.in</p>
+                <p className="text-xs text-[#8a857d]">Direct response within 24 hours</p>
+              </div>
+
+              <div className="p-5 bg-[#201f1c] border border-[#33312c] rounded-2xl space-y-1.5">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#c9b293]">
+                  <Phone className="w-3.5 h-3.5" />
+                  <span>Studio Telephone &amp; WhatsApp</span>
+                </div>
+                <p className="font-mono text-white text-sm">+91 44 2833 4900</p>
+                <p className="text-xs text-[#8a857d]">Master Stylist available 10am–7pm IST</p>
+              </div>
+
+              <div className="p-5 bg-[#201f1c] border border-[#33312c] rounded-2xl space-y-1.5">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#c9b293]">
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>Chennai Salon Location</span>
+                </div>
+                <p className="text-white text-sm">Khader Nawaz Khan Road, Nungambakkam</p>
+                <p className="text-xs text-[#8a857d]">Chennai, Tamil Nadu 600006</p>
+                <p className="font-mono text-xs text-[#c9b293] pt-1">Mon–Sat / 10:00 AM – 7:00 PM</p>
+              </div>
             </div>
 
-            <div className="space-y-1">
-              <h3 className="text-sm font-serif text-white block">Chennai Salon Location</h3>
-              <p>Khader Nawaz Khan Road, Nungambakkam</p>
-              <p>Chennai, Tamil Nadu 600006</p>
-              <p className="font-mono text-[11px] text-[#78736b] pt-1">Mon–Sat / 10am–7pm</p>
-            </div>
-
-            <div className="pt-4 border-t border-[#292724] space-y-2 text-xs">
-              <h3 className="text-sm font-serif text-white block">Returns &amp; Courier Exchanges</h3>
+            <div className="pt-4 border-t border-[#2e2c28] space-y-2 text-xs text-[#8a857d] leading-relaxed">
+              <span className="font-mono uppercase tracking-wider text-[#c9b293] block">
+                Complimentary Courier &amp; Doorstep Exchange
+              </span>
               <p>
-                We accept exchanges and returns within 14 days of receipt. Doorstep pickup is complimentary across India.
+                All orders include insured doorstep delivery and complimentary 14-day reverse courier collection across India.
               </p>
             </div>
           </section>

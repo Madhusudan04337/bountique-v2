@@ -57,7 +57,7 @@ export function SearchModal() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.2 }}
-              className="w-full max-w-xl bg-[#1e1d1a] border border-[#36342f] text-[#f4efe9] p-6 shadow-2xl relative z-10 text-left rounded-3xl"
+              className="w-full max-w-xl bg-[#1e1d1a] border border-[#36342f] text-[#f4efe9] p-6 shadow-2xl relative z-10 text-left rounded-3xl max-h-[85vh] overflow-y-auto"
             >
               <h2 id="search-modal-title" className="sr-only">
                 Search Boutique Pieces

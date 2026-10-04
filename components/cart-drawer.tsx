@@ -46,7 +46,7 @@ export function CartDrawer() {
             className="fixed inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"
           />
 
-          <div className="fixed inset-y-0 right-0 flex max-w-full pl-6">
+          <div className="fixed inset-y-0 right-0 flex max-w-full pl-0 sm:pl-6">
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}

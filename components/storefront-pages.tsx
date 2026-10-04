@@ -35,7 +35,7 @@ import { useStore, formatMoney, Product, Review } from '@/lib/store'
 import { ProductCard } from '@/components/product-card'
 import { PackagingModal } from '@/components/packaging-modal'
 import { SizingGuideModal } from '@/components/sizing-guide-modal'
-import { AtelierButton, AtelierBadge, SectionHeader, OrganicCard } from '@/components/ui-kit'
+import { AtelierButton, AtelierIconButton, AtelierBadge, SectionHeader, OrganicCard, FilterPill } from '@/components/ui-kit'
 
 // ==========================================
 // 1. COLLECTION PAGE
@@ -124,18 +124,12 @@ function CollectionPageContent({ arrivalsOnly = false }: { arrivalsOnly?: boolea
 
           <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 scrollbar-none">
             {categories.map(cat => (
-              <button
+              <FilterPill
                 key={cat}
-                type="button"
+                label={cat}
+                active={selectedCategory === cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3 sm:px-4 py-1.5 text-xs font-mono uppercase tracking-wider rounded-full transition-colors whitespace-nowrap cursor-pointer shrink-0 ${
-                  selectedCategory === cat
-                    ? 'bg-[#c9b293] text-[#181716] font-semibold'
-                    : 'text-[#9c978f] hover:text-[#f4efe9] bg-[#201f1c]/60 sm:bg-transparent'
-                }`}
-              >
-                {cat}
-              </button>
+              />
             ))}
           </div>
 
@@ -691,18 +685,14 @@ function ProductPageInner({ slug }: { slug?: string }) {
                   Add Size {selectedSize} to Bag
                 </AtelierButton>
 
-                <button
-                  type="button"
+                <AtelierIconButton
+                  icon={Heart}
+                  variant="glass"
+                  size="lg"
+                  active={wishlisted}
                   onClick={() => toggleWishlist(product.id)}
-                  className={`p-3.5 sm:p-4 border rounded-full transition-all shrink-0 cursor-pointer ${
-                    wishlisted
-                      ? 'border-[#c9b293] bg-[#c9b293]/15 text-[#c9b293]'
-                      : 'border-[#35332e] bg-[#21201d] text-[#a7a299] hover:text-white'
-                  }`}
-                  aria-label="Wishlist"
-                >
-                  <Heart className="w-4 h-4" fill={wishlisted ? 'currentColor' : 'none'} />
-                </button>
+                  label={wishlisted ? 'Remove from wishlist' : 'Save to wishlist'}
+                />
               </div>
 
               {/* VIP Stylist Consultation */}

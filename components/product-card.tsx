@@ -5,14 +5,20 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Heart, Plus, Check } from 'lucide-react'
 import { motion } from 'motion/react'
-import { Product, useStore, formatMoney } from '@/lib/store'
+import { Product, useStore } from '@/lib/store'
+import { AtelierBadge, PriceTag } from '@/components/ui-kit'
 
 interface ProductCardProps {
   product: Product
   priority?: boolean
+  variant?: 'standard' | 'compact'
 }
 
-export function ProductCard({ product, priority = false }: ProductCardProps) {
+export function ProductCard({
+  product,
+  priority = false,
+  variant = 'standard'
+}: ProductCardProps) {
   const { addToCart, toggleWishlist, isWishlisted } = useStore()
   const [selectedSize, setSelectedSize] = useState(product.sizes[0] || 'S')
   const [showQuickAdd, setShowQuickAdd] = useState(false)
@@ -39,66 +45,64 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
 
   return (
     <article
-      className="group relative flex flex-col bg-[#21201d] border border-[#35332e] hover:border-[#c9b293]/60 rounded-t-[3rem] rounded-b-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-black/60 transition-all duration-300 hover:-translate-y-1.5"
-      onMouseLeave={() => {
-        setShowQuickAdd(false)
-      }}
+      className="group relative flex flex-col bg-[#201f1c] border border-[#35332e] hover:border-[#c9b293]/60 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+      onMouseLeave={() => setShowQuickAdd(false)}
     >
-      {/* Product Image with Organic Arch top */}
-      <div className="relative aspect-[3/4] w-full bg-[#1b1a18] overflow-hidden rounded-t-[3rem]">
+      {/* Product Image Container */}
+      <div className="relative aspect-[3/4] w-full bg-[#181716] overflow-hidden">
         <Link href={`/product/${product.slug}`} className="block w-full h-full">
           <Image
             src={product.image}
             alt={product.name}
             fill
             priority={priority}
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 filter brightness-[0.93] contrast-[1.02]"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-105 filter brightness-[0.94] contrast-[1.02]"
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           />
         </Link>
 
-        {/* Scarcity / Tag Overlay */}
-        <div className="absolute top-4 left-5 flex flex-col gap-1.5 z-10 pointer-events-none">
+        {/* Badges / Tags (Top Left) */}
+        <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 flex flex-col gap-1 z-10 pointer-events-none">
           {product.tag && (
-            <span className="px-2.5 py-0.5 bg-[#181716]/90 border border-[#3b3934] text-[9px] font-mono uppercase tracking-[0.14em] text-[#c9b293] rounded-full backdrop-blur-md">
+            <AtelierBadge variant={product.tag === 'Bestseller' ? 'gold' : 'subtle'}>
               {product.tag}
-            </span>
+            </AtelierBadge>
           )}
-          {product.stockRemaining <= 5 && (
-            <span className="px-2 py-0.5 bg-[#2a1e17]/90 border border-[#8a4e32]/60 text-[8px] font-mono uppercase tracking-widest text-[#e89069] rounded-full backdrop-blur-md">
+          {product.stockRemaining <= 4 && (
+            <AtelierBadge variant="scarcity">
               Only {product.stockRemaining} left
-            </span>
+            </AtelierBadge>
           )}
         </div>
 
-        {/* Wishlist / Like Button with Instant Visual Feedback */}
+        {/* Wishlist Button (Top Right) */}
         <button
           type="button"
           onClick={handleWishlistToggle}
-          className={`absolute top-4 right-5 p-2.5 rounded-full transition-all z-20 backdrop-blur-md shadow-lg cursor-pointer hover:scale-110 active:scale-90 ${
+          className={`absolute top-2.5 right-2.5 sm:top-3 sm:right-3 w-7 h-7 sm:w-8 sm:h-8 rounded-full transition-all z-20 backdrop-blur-md flex items-center justify-center cursor-pointer ${
             wishlisted
-              ? 'bg-[#c9b293] text-[#181716] shadow-[0_0_12px_rgba(201,178,147,0.5)]'
-              : 'bg-[#181716]/85 text-[#f4efe9] hover:text-[#c9b293] hover:border-[#c9b293] border border-[#38352f]'
+              ? 'bg-[#c9b293] text-[#181716] shadow-md scale-105'
+              : 'bg-[#181716]/80 text-[#f4efe9] hover:text-[#c9b293] hover:border-[#c9b293] border border-[#38352f]'
           }`}
           aria-label={wishlisted ? `Remove ${product.name} from wishlist` : `Save ${product.name} to wishlist`}
         >
-          <Heart className="w-4 h-4 transition-transform" fill={wishlisted ? 'currentColor' : 'none'} />
+          <Heart className="w-3.5 h-3.5" fill={wishlisted ? 'currentColor' : 'none'} />
         </button>
 
-        {/* Quick Add Tray */}
-        <div className="absolute inset-x-4 bottom-4 z-20">
+        {/* Compact Quick Add Overlay */}
+        <div className="absolute inset-x-2.5 bottom-2.5 z-20">
           {showQuickAdd ? (
             <div
-              className="p-3 bg-[#181716]/95 border border-[#3d3a34] backdrop-blur-md rounded-2xl shadow-2xl animate-in fade-in duration-200"
+              className="p-2 bg-[#181716]/95 border border-[#3d3a34] backdrop-blur-md rounded-xl shadow-xl animate-in fade-in duration-150"
               onClick={e => e.stopPropagation()}
             >
-              <div className="flex gap-1 mb-2">
+              <div className="flex gap-1 mb-1.5">
                 {product.sizes.map(size => (
                   <button
                     key={size}
                     type="button"
                     onClick={() => setSelectedSize(size)}
-                    className={`flex-1 py-1 text-xs font-mono rounded-lg border transition-all cursor-pointer ${
+                    className={`flex-1 py-0.5 text-[10px] font-mono rounded border transition-all cursor-pointer ${
                       selectedSize === size
                         ? 'border-[#c9b293] bg-[#c9b293] text-[#181716] font-semibold'
                         : 'border-[#383530] bg-[#22201d] text-[#a7a299] hover:text-white'
@@ -111,15 +115,15 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
               <button
                 type="button"
                 onClick={handleQuickAdd}
-                className="w-full py-2 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-mono text-[10px] uppercase tracking-widest font-semibold flex items-center justify-center gap-1.5 transition-colors rounded-xl shadow-md cursor-pointer active:scale-95"
+                className="w-full h-7 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-mono text-[9px] sm:text-[10px] uppercase tracking-wider font-semibold flex items-center justify-center gap-1 transition-colors rounded-lg shadow-sm cursor-pointer"
               >
                 {justAdded ? (
                   <>
-                    <Check className="w-3.5 h-3.5" /> Added to Bag
+                    <Check className="w-3 h-3" /> Added!
                   </>
                 ) : (
                   <>
-                    <Plus className="w-3.5 h-3.5" /> Quick Add Size {selectedSize}
+                    <Plus className="w-3 h-3" /> Add Size {selectedSize}
                   </>
                 )}
               </button>
@@ -132,35 +136,39 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
                 e.stopPropagation()
                 setShowQuickAdd(true)
               }}
-              className="w-full py-2.5 px-3 bg-[#181716]/90 hover:bg-[#c9b293] hover:text-[#181716] text-[#f4efe9] border border-[#3b3933] text-[10px] font-mono uppercase tracking-[0.16em] flex items-center justify-center gap-1.5 transition-all opacity-95 sm:opacity-0 sm:group-hover:opacity-100 rounded-full backdrop-blur-md shadow-xl cursor-pointer"
+              className="w-full h-7 sm:h-8 px-2.5 bg-[#181716]/90 hover:bg-[#c9b293] hover:text-[#181716] text-[#f4efe9] border border-[#3b3933] text-[9px] sm:text-[10px] font-mono uppercase tracking-wider flex items-center justify-center gap-1 transition-all rounded-full backdrop-blur-md shadow-md cursor-pointer opacity-90 sm:opacity-0 sm:group-hover:opacity-100"
             >
-              <Plus className="w-3.5 h-3.5" />
+              <Plus className="w-3 h-3" />
               <span>Quick Bag</span>
             </button>
           )}
         </div>
       </div>
 
-      {/* Meta Information */}
-      <div className="p-5 flex-1 flex flex-col justify-between space-y-2.5 bg-[#21201d]">
+      {/* Card Content & Metadata */}
+      <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between space-y-2 bg-[#201f1c]">
         <div>
-          <div className="flex justify-between items-center text-[10px] font-mono text-[#8a857d] mb-1">
+          <div className="flex justify-between items-center text-[9px] sm:text-[10px] font-mono text-[#8a857d] mb-1">
             <span>{product.batchNumber}</span>
             <span>{product.silhouetteFit}</span>
           </div>
-          <h3 className="text-base font-serif text-[#f4efe9] group-hover:text-[#c9b293] transition-colors leading-snug">
+
+          <h3 className="text-xs sm:text-sm font-serif text-[#f4efe9] group-hover:text-[#c9b293] transition-colors leading-snug truncate">
             <Link href={`/product/${product.slug}`}>{product.name}</Link>
           </h3>
-          <p className="text-xs text-[#8e8981] font-sans mt-0.5">
+
+          <p className="text-[11px] text-[#8e8981] font-sans truncate mt-0.5">
             {product.fabric}
           </p>
         </div>
 
-        <div className="pt-2.5 border-t border-[#2d2b27] flex items-baseline justify-between text-xs font-mono">
-          <span className="text-[#f4efe9] tabular-nums font-medium">
-            {formatMoney(product.price)}
-          </span>
-          <span className="text-[#7f7a72]">{product.color}</span>
+        <div className="pt-2 border-t border-[#2c2a26]">
+          <PriceTag
+            price={product.price}
+            originalPrice={product.originalPrice}
+            color={product.color}
+            size="sm"
+          />
         </div>
       </div>
     </article>

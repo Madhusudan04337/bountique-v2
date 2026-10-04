@@ -68,11 +68,6 @@ export function SiteHeader() {
 
   return (
     <>
-      {/* Top Banner */}
-      <div className="bg-[#121110] border-b border-[#24221f] text-[#8a857d] py-1.5 px-4 text-center text-[10px] font-mono tracking-[0.22em] uppercase flex items-center justify-center">
-        <span>Chennai Atelier Flagship · Complimentary Insured Courier Across India</span>
-      </div>
-
       {/* Main Header */}
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-300 ${

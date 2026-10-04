@@ -19,6 +19,7 @@ import {
   ArrowRight
 } from 'lucide-react'
 import { styledLooks, useStore, formatMoney, Product } from '@/lib/store'
+import { AtelierButton, AtelierBadge, SectionHeader } from '@/components/ui-kit'
 
 export function ShopTheLookSection() {
   const { products, addToCart, addBundleToCart, showToast } = useStore()
@@ -589,27 +590,18 @@ export function ShopTheLookSection() {
                 </span>
               </div>
 
-              <button
-                type="button"
+              <AtelierButton
                 onClick={handleAddCustomBundleToCart}
-                className={`w-full py-2.5 sm:py-3 px-4 font-mono text-[11px] sm:text-xs uppercase tracking-wider font-semibold rounded-full flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md active:scale-98 ${
-                  justAddedBundle
-                    ? 'bg-[#55e08b] text-[#181716]'
-                    : 'bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716]'
-                }`}
+                variant="primary"
+                size="md"
+                fullWidth
+                icon={justAddedBundle ? Check : ShoppingBag}
+                iconPosition="left"
               >
-                {justAddedBundle ? (
-                  <>
-                    <Check className="w-3.5 h-3.5" />
-                    <span>Ensemble Added to Bag! (LOOK10)</span>
-                  </>
-                ) : (
-                  <>
-                    <ShoppingBag className="w-3.5 h-3.5" />
-                    <span>Add Complete Look ({bundledProducts.length} Pieces)</span>
-                  </>
-                )}
-              </button>
+                {justAddedBundle
+                  ? 'Ensemble Added to Bag! (LOOK10)'
+                  : `Add Complete Look (${bundledProducts.length} Pieces)`}
+              </AtelierButton>
 
               <div className="flex justify-between items-center text-[10px] font-mono text-[#8a857d] pt-1">
                 <span>Includes Cedarwood Box &amp; Linen Dust Cover</span>

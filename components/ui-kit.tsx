@@ -2,13 +2,16 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { motion, HTMLMotionProps } from 'motion/react'
-import { ArrowRight, LucideIcon } from 'lucide-react'
+import { motion } from 'motion/react'
+import { ArrowRight, LucideIcon, Heart } from 'lucide-react'
+import { formatMoney } from '@/lib/store'
 
-// 1. REUSABLE ATELIER BUTTON
+// ==========================================
+// 1. DESIGN SYSTEM: ATELIER BUTTON
+// ==========================================
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'glass'
-  size?: 'sm' | 'md' | 'lg'
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'glass' | 'dark'
+  size?: 'xs' | 'sm' | 'md' | 'lg'
   icon?: LucideIcon
   iconPosition?: 'left' | 'right'
   href?: string
@@ -27,20 +30,22 @@ export function AtelierButton({
   disabled,
   ...props
 }: ButtonProps) {
-  const baseClasses = 'inline-flex items-center justify-center font-mono uppercase tracking-[0.16em] font-semibold transition-all duration-300 rounded-full cursor-pointer select-none'
+  const baseClasses = 'inline-flex items-center justify-center font-mono uppercase tracking-[0.14em] font-semibold transition-all duration-200 rounded-full cursor-pointer select-none whitespace-nowrap active:scale-[0.98]'
 
   const sizeClasses = {
-    sm: 'text-[10px] py-2 px-3.5 gap-1.5 min-h-[38px]',
-    md: 'text-xs py-3 px-5 sm:px-6 gap-2 min-h-[44px]',
-    lg: 'text-xs sm:text-sm py-3.5 sm:py-4 px-6 sm:px-8 gap-2.5 min-h-[48px]'
+    xs: 'text-[9px] h-7 px-2.5 gap-1',
+    sm: 'text-[10px] sm:text-[11px] h-8 sm:h-9 px-3.5 gap-1.5',
+    md: 'text-xs h-10 sm:h-11 px-4 sm:px-5 gap-2',
+    lg: 'text-xs sm:text-sm h-11 sm:h-12 px-6 sm:px-7 gap-2'
   }[size]
 
   const variantClasses = {
-    primary: 'bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] shadow-lg hover:shadow-[0_10px_25px_rgba(201,178,147,0.25)] hover:scale-[1.02] active:scale-[0.98]',
-    secondary: 'bg-[#252320] hover:bg-[#302d28] text-[#f4efe9] border border-[#3d3a33] hover:border-[#c9b293] shadow-md active:scale-[0.98]',
-    outline: 'bg-transparent hover:bg-[#201f1c] text-[#f4efe9] border border-[#3d3a33] hover:border-[#c9b293] active:scale-[0.98]',
+    primary: 'bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] shadow-md hover:shadow-[0_4px_20px_rgba(201,178,147,0.25)]',
+    secondary: 'bg-[#24221f] hover:bg-[#2e2b26] text-[#f4efe9] border border-[#3b3832] hover:border-[#c9b293] shadow-sm',
+    outline: 'bg-transparent hover:bg-[#201f1c] text-[#f4efe9] border border-[#3d3a33] hover:border-[#c9b293]',
     ghost: 'bg-transparent hover:bg-[#252320]/60 text-[#c9b293] hover:text-[#dfcaa8]',
-    glass: 'bg-[#181716]/80 hover:bg-[#1f1e1b] text-[#f4efe9] border border-[#3b3832] backdrop-blur-md shadow-md active:scale-[0.98]'
+    glass: 'bg-[#181716]/85 hover:bg-[#22201d] text-[#f4efe9] border border-[#3b3832] hover:border-[#c9b293] backdrop-blur-md shadow-sm',
+    dark: 'bg-[#181716] hover:bg-[#22201d] text-[#f4efe9] border border-[#33312c]'
   }[variant]
 
   const widthClass = fullWidth ? 'w-full' : ''
@@ -70,7 +75,63 @@ export function AtelierButton({
   )
 }
 
-// 2. REUSABLE ATELIER BADGE / TAG
+// ==========================================
+// 2. DESIGN SYSTEM: ICON BUTTON
+// ==========================================
+export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  icon: LucideIcon
+  variant?: 'subtle' | 'primary' | 'outline' | 'glass'
+  size?: 'sm' | 'md' | 'lg'
+  active?: boolean
+  label?: string
+}
+
+export function AtelierIconButton({
+  icon: Icon,
+  variant = 'glass',
+  size = 'md',
+  active = false,
+  label,
+  className = '',
+  ...props
+}: IconButtonProps) {
+  const sizeClasses = {
+    sm: 'w-7 h-7 sm:w-8 sm:h-8 p-1.5',
+    md: 'w-9 h-9 sm:w-10 sm:h-10 p-2 sm:p-2.5',
+    lg: 'w-11 h-11 sm:w-12 sm:h-12 p-3'
+  }[size]
+
+  const iconSizes = {
+    sm: 'w-3.5 h-3.5',
+    md: 'w-4 h-4',
+    lg: 'w-4.5 h-4.5'
+  }[size]
+
+  const variantClasses = {
+    glass: active
+      ? 'bg-[#c9b293] text-[#181716] border-[#c9b293] shadow-md'
+      : 'bg-[#181716]/85 text-[#a7a297] hover:text-white border-[#38352f] hover:border-[#c9b293] backdrop-blur-md',
+    primary: 'bg-[#c9b293] text-[#181716] border-transparent hover:bg-[#dfcaa8]',
+    outline: 'bg-transparent text-[#a7a297] hover:text-white border-[#38352f] hover:border-[#c9b293]',
+    subtle: 'bg-[#22201d] text-[#a7a297] hover:text-white border-[#33312c] hover:border-[#c9b293]'
+  }[variant]
+
+  return (
+    <motion.button
+      whileTap={{ scale: 0.93 }}
+      type="button"
+      aria-label={label}
+      className={`rounded-full border flex items-center justify-center transition-all cursor-pointer shadow-sm ${sizeClasses} ${variantClasses} ${className}`}
+      {...(props as any)}
+    >
+      <Icon className={iconSizes} />
+    </motion.button>
+  )
+}
+
+// ==========================================
+// 3. DESIGN SYSTEM: ATELIER BADGE / TAG / PILL
+// ==========================================
 export interface BadgeProps {
   children: React.ReactNode
   variant?: 'gold' | 'subtle' | 'scarcity' | 'emerald' | 'mono'
@@ -86,21 +147,99 @@ export function AtelierBadge({
 }: BadgeProps) {
   const variantStyles = {
     gold: 'bg-[#1e1c19]/90 border-[#c9b293]/40 text-[#c9b293]',
-    subtle: 'bg-[#181716]/80 border-[#38352f] text-[#a7a297]',
+    subtle: 'bg-[#181716]/85 border-[#38352f] text-[#a7a297]',
     scarcity: 'bg-[#2a1e17]/90 border-[#8a4e32]/60 text-[#e89069]',
     emerald: 'bg-[#16241b]/90 border-[#326941]/60 text-[#55e08b]',
     mono: 'bg-[#201f1c] border-[#38352f] text-[#f4efe9]'
   }[variant]
 
   return (
-    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-[10px] font-mono uppercase tracking-[0.2em] backdrop-blur-md shadow-sm ${variantStyles} ${className}`}>
+    <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.14em] backdrop-blur-md shadow-sm whitespace-nowrap ${variantStyles} ${className}`}>
       {Icon && <Icon className="w-3 h-3 shrink-0" />}
       <span>{children}</span>
     </span>
   )
 }
 
-// 3. REUSABLE SECTION HEADER
+// ==========================================
+// 4. DESIGN SYSTEM: PRICE TAG WITH PROPER SPACING
+// ==========================================
+export interface PriceTagProps {
+  price: number
+  originalPrice?: number
+  color?: string
+  size?: 'sm' | 'md' | 'lg'
+  className?: string
+}
+
+export function PriceTag({
+  price,
+  originalPrice,
+  color,
+  size = 'md',
+  className = ''
+}: PriceTagProps) {
+  const sizeClasses = {
+    sm: 'text-xs',
+    md: 'text-xs sm:text-sm',
+    lg: 'text-lg sm:text-xl'
+  }[size]
+
+  return (
+    <div className={`flex items-baseline justify-between font-mono gap-2 ${sizeClasses} ${className}`}>
+      <div className="flex items-baseline gap-1.5">
+        <span className="text-[#f4efe9] font-medium tabular-nums">
+          {formatMoney(price)}
+        </span>
+        {originalPrice && originalPrice > price && (
+          <span className="text-[10px] text-[#78736b] line-through tabular-nums">
+            {formatMoney(originalPrice)}
+          </span>
+        )}
+      </div>
+      {color && (
+        <span className="text-[11px] text-[#8a857d] font-sans truncate">
+          {color}
+        </span>
+      )}
+    </div>
+  )
+}
+
+// ==========================================
+// 5. DESIGN SYSTEM: FILTER PILL
+// ==========================================
+export interface FilterPillProps {
+  label: string
+  active?: boolean
+  onClick: () => void
+  count?: number
+}
+
+export function FilterPill({ label, active = false, onClick, count }: FilterPillProps) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`h-8 sm:h-9 px-3 sm:px-4 text-xs font-mono uppercase tracking-wider rounded-full border transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
+        active
+          ? 'border-[#c9b293] bg-[#c9b293] text-[#181716] font-semibold shadow-sm'
+          : 'border-[#38352f] bg-[#201f1c]/70 text-[#a7a297] hover:text-white hover:border-[#524f46]'
+      }`}
+    >
+      <span>{label}</span>
+      {count !== undefined && (
+        <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${active ? 'bg-[#181716]/20 text-[#181716]' : 'bg-[#181716] text-[#8a857d]'}`}>
+          {count}
+        </span>
+      )}
+    </button>
+  )
+}
+
+// ==========================================
+// 6. DESIGN SYSTEM: SECTION HEADER
+// ==========================================
 export interface SectionHeaderProps {
   kicker?: string
   kickerIcon?: LucideIcon
@@ -123,7 +262,7 @@ export function SectionHeader({
   className = ''
 }: SectionHeaderProps) {
   return (
-    <div className={`relative z-10 mb-8 sm:mb-12 flex flex-col ${align === 'center' ? 'items-center text-center' : 'sm:flex-row sm:items-end justify-between'} gap-4 ${className}`}>
+    <div className={`relative z-10 mb-6 sm:mb-10 flex flex-col ${align === 'center' ? 'items-center text-center' : 'sm:flex-row sm:items-end justify-between'} gap-3 sm:gap-4 ${className}`}>
       <div className={align === 'center' ? 'max-w-2xl' : 'max-w-xl'}>
         {kicker && (
           <div className="mb-2">
@@ -132,11 +271,11 @@ export function SectionHeader({
             </AtelierBadge>
           </div>
         )}
-        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-serif text-[#f4efe9] leading-tight tracking-tight">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#f4efe9] leading-tight tracking-tight">
           {title}
         </h2>
         {description && (
-          <p className="text-xs sm:text-sm font-sans text-[#a7a297] mt-2 sm:mt-3 leading-relaxed prose-readable">
+          <p className="text-xs sm:text-sm font-sans text-[#a7a297] mt-1.5 sm:mt-2.5 leading-relaxed prose-readable">
             {description}
           </p>
         )}
@@ -145,7 +284,7 @@ export function SectionHeader({
       {actionHref && actionLabel && (
         <Link
           href={actionHref}
-          className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#c9b293] hover:text-[#f4efe9] transition-colors shrink-0 group self-start sm:self-auto cursor-pointer"
+          className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#c9b293] hover:text-[#f4efe9] transition-colors shrink-0 group self-start sm:self-auto cursor-pointer pb-0.5 border-b border-[#c9b293]/30 hover:border-[#c9b293]"
         >
           <span>{actionLabel}</span>
           <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -155,7 +294,9 @@ export function SectionHeader({
   )
 }
 
-// 4. REUSABLE ORGANIC SURFACE CARD
+// ==========================================
+// 7. DESIGN SYSTEM: REUSABLE CARD CONTAINER
+// ==========================================
 export interface OrganicCardProps {
   children: React.ReactNode
   contour?: 'arch-top' | 'arch-diagonal' | 'pill' | 'soft'
@@ -172,16 +313,16 @@ export function OrganicCard({
   onClick
 }: OrganicCardProps) {
   const contourClasses = {
-    'arch-top': 'rounded-t-[3.5rem] sm:rounded-t-[4.5rem] rounded-b-2xl sm:rounded-b-3xl',
-    'arch-diagonal': 'rounded-tl-[3.5rem] rounded-br-[3.5rem] rounded-tr-2xl rounded-bl-2xl',
-    'pill': 'rounded-[2.5rem] sm:rounded-[3rem]',
+    'arch-top': 'rounded-2xl sm:rounded-3xl',
+    'arch-diagonal': 'rounded-2xl sm:rounded-3xl',
+    'pill': 'rounded-2xl sm:rounded-3xl',
     'soft': 'rounded-2xl sm:rounded-3xl'
   }[contour]
 
   return (
     <div
       onClick={onClick}
-      className={`relative bg-gradient-to-b from-[#22211e]/95 via-[#1e1d1a]/90 to-[#191817] border border-[#35332e] shadow-xl backdrop-blur-md overflow-hidden ${contourClasses} ${glow ? 'shadow-[0_0_50px_rgba(201,178,147,0.08)]' : ''} ${className}`}
+      className={`relative bg-[#21201d] border border-[#35332e] shadow-xl overflow-hidden ${contourClasses} ${glow ? 'shadow-[0_0_40px_rgba(201,178,147,0.06)]' : ''} ${className}`}
     >
       {children}
     </div>

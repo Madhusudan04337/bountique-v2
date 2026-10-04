@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Heart, MessageSquare, Sparkles, Feather } from 'lucide-react'
 import { useStore, formatMoney, initialProducts } from '@/lib/store'
-import { AtelierButton, AtelierBadge, SectionHeader } from '@/components/ui-kit'
+import { AtelierButton, AtelierIconButton, AtelierBadge, SectionHeader } from '@/components/ui-kit'
 
 export function SplitShowcase() {
   const { products, addToCart, toggleWishlist, isWishlisted, setIsStylistDrawerOpen, setIsCartOpen } = useStore()
@@ -100,7 +100,7 @@ export function SplitShowcase() {
 
               {/* Actions */}
               <div className="space-y-2.5 pt-1">
-                <div className="flex gap-2">
+                <div className="flex items-center gap-2">
                   <AtelierButton
                     onClick={() => {
                       addToCart(current, 'S', current.color, 1)
@@ -113,22 +113,18 @@ export function SplitShowcase() {
                     Quick Add Size S
                   </AtelierButton>
 
-                  <button
-                    type="button"
+                  <AtelierIconButton
+                    icon={Heart}
+                    variant="glass"
+                    size="md"
+                    active={wishlisted}
                     onClick={() => toggleWishlist(current.id)}
-                    className={`p-3 border rounded-full transition-all cursor-pointer shrink-0 ${
-                      wishlisted
-                        ? 'border-[#c9b293] bg-[#c9b293] text-[#181716]'
-                        : 'border-[#38352f] bg-[#201f1c] text-[#a7a297] hover:text-white'
-                    }`}
-                    aria-label="Save piece"
-                  >
-                    <Heart className="w-4 h-4" fill={wishlisted ? 'currentColor' : 'none'} />
-                  </button>
+                    label={wishlisted ? 'Remove from wishlist' : 'Save to wishlist'}
+                  />
 
                   <Link
                     href={`/product/${current.slug}`}
-                    className="p-3 border border-[#38352f] bg-[#201f1c] hover:border-[#c9b293] rounded-full text-[#a7a297] hover:text-white transition-colors shrink-0 flex items-center justify-center"
+                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-[#38352f] bg-[#181716]/85 hover:border-[#c9b293] text-[#a7a297] hover:text-white transition-colors shrink-0 flex items-center justify-center cursor-pointer shadow-sm"
                     aria-label="View piece details"
                   >
                     <ArrowRight className="w-4 h-4" />

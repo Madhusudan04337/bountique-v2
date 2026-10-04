@@ -95,11 +95,11 @@ export default function HomePage() {
               Belgian flax linen and raw mulberry silk, cut in unhurried limited editions inside our Chennai atelier.
             </p>
 
-            <div className="pt-2 flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
+            <div className="pt-2 flex flex-col sm:flex-row gap-2.5 sm:gap-4 items-stretch sm:items-center">
               <AtelierButton
                 href="/collection"
                 variant="primary"
-                size="lg"
+                size="md"
                 icon={ArrowRight}
               >
                 Explore Silhouettes
@@ -108,7 +108,7 @@ export default function HomePage() {
               <AtelierButton
                 onClick={() => setIsProvenanceModalOpen(true)}
                 variant="glass"
-                size="lg"
+                size="md"
                 icon={Compass}
                 iconPosition="left"
               >

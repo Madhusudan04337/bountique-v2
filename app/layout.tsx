@@ -1,12 +1,20 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
-import './contact/contact.css'
+import { StoreProvider } from '@/lib/store'
+import { SiteHeader } from '@/components/site-header'
+import { CartDrawer } from '@/components/cart-drawer'
+import { SearchModal } from '@/components/search-modal'
+import { ToastNotification } from '@/components/toast-notification'
+import { SalonBookingModal } from '@/components/salon-booking-modal'
+import { ProvenanceModal } from '@/components/provenance-modal'
+import { VipStylistDrawer } from '@/components/vip-stylist-drawer'
+import { FloatingVipStylist } from '@/components/floating-vip-stylist'
+import { ReadingProgress } from '@/components/reading-progress'
 import { SiteFooter } from '@/components/site-footer'
 
 export const metadata: Metadata = {
-  title: 'Aurora — Everyday elegance, considered in Chennai',
-  description: 'A study in the everyday. Intelligent silhouettes, natural textures and easy confidence from Aurora Chennai.',
-  generator: 'v0.app',
+  title: 'AURORA — Chennai Boutique Flagship',
+  description: 'Considered silhouettes, natural Belgian flax, and mulberry silk tailored in Chennai.',
   icons: {
     icon: [
       {
@@ -27,11 +35,8 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'light dark',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
-  ],
+  colorScheme: 'dark',
+  themeColor: '#181716',
 }
 
 export default function RootLayout({
@@ -40,10 +45,21 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
-        {children}
-        <SiteFooter />
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body className="antialiased bg-[#181716] text-[#f4efe9] min-h-screen flex flex-col font-sans selection:bg-[#c9b293]/30" suppressHydrationWarning>
+        <StoreProvider>
+          <ReadingProgress />
+          <SiteHeader />
+          <CartDrawer />
+          <SearchModal />
+          <SalonBookingModal />
+          <ProvenanceModal />
+          <VipStylistDrawer />
+          <FloatingVipStylist />
+          <ToastNotification />
+          <div className="flex-1">{children}</div>
+          <SiteFooter />
+        </StoreProvider>
       </body>
     </html>
   )

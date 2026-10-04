@@ -1,14 +1,135 @@
 'use client'
 
+import React, { useState } from 'react'
 import Link from 'next/link'
-import { useState } from 'react'
-import { ArrowRight, Globe2, Mail, MapPin, MessageCircle, Phone, Send, ShieldCheck, Truck } from 'lucide-react'
-import { StoreHeader } from './storefront-pages'
-
-const faqs = ['What is your return policy?', 'How do I track my order?', 'Do you ship internationally?', 'Can I change my delivery address?']
+import { Check } from 'lucide-react'
+import { useStore } from '@/lib/store'
 
 export function ContactPage() {
-  const [sent, setSent] = useState(false)
+  const { showToast } = useStore()
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+  const [submitted, setSubmitted] = useState(false)
 
-  return <main className="contact-page"><StoreHeader /><section className="contact-hero"><div className="contact-hero-image"><div className="contact-image-note">Studio / Chennai</div></div><div className="contact-hero-copy"><span className="eyebrow">Customer care / 01</span><h1>Let&apos;s talk<br /><em>things through.</em></h1><p>Questions about a piece, an order, or finding your perfect fit? Our small team is here to help.</p><a href="#message" className="text-link">Send us a message <ArrowRight /></a></div></section><section className="contact-options"><div className="section-intro"><span className="eyebrow">Ways to reach us</span><h2>We&apos;re here<br /><em>to help.</em></h2></div><div className="contact-option-grid"><a href="mailto:hello@aurorastudio.in" className="contact-option"><Mail /><span><small>Email</small><strong>hello@aurorastudio.in</strong><b>Usually within 24 hours</b></span></a><a href="tel:+914412345678" className="contact-option"><Phone /><span><small>Phone</small><strong>+91 44 1234 5678</strong><b>Mon–Sat / 10am–6pm</b></span></a><a href="#message" className="contact-option"><MessageCircle /><span><small>Chat</small><strong>Talk to the studio</strong><b>Start a conversation</b></span></a><div className="contact-option"><MapPin /><span><small>Visit</small><strong>Chennai studio</strong><b>By appointment</b></span></div></div></section><section className="contact-workspace" id="message"><div className="contact-form-card"><span className="eyebrow">Send a message</span><h2>How can we<br /><em>help?</em></h2>{sent ? <div className="form-success"><span>Thank you.</span><p>Your note is with our team. We&apos;ll be in touch shortly.</p></div> : <form onSubmit={event => { event.preventDefault(); setSent(true) }}><label>Name<input required name="name" placeholder="Your name" /></label><label>Email<input required type="email" name="email" placeholder="you@example.com" /></label><label>Subject<select name="subject" defaultValue=""><option value="" disabled>Select a topic</option><option>Order support</option><option>Product question</option><option>Returns & exchanges</option></select></label><label>Message<textarea required name="message" placeholder="Tell us a little more..." rows={5} /></label><button className="button button-dark" type="submit">Send message <Send /></button></form>}</div><div className="contact-details"><div><span className="eyebrow">Contact info</span><h3>Good things<br /><em>take time.</em></h3><p>Our studio is open Monday to Saturday, 10am to 6pm IST. We answer every note with care.</p></div><div className="contact-detail-list"><p><Mail /> hello@aurorastudio.in</p><p><Phone /> +91 44 1234 5678</p><p><MapPin /> Chennai, Tamil Nadu</p></div><div className="social-row"><a href="#instagram" aria-label="Instagram"><Globe2 /></a><a href="#mail" aria-label="Email"><Mail /></a><a href="#chat" aria-label="Chat"><MessageCircle /></a></div></div></section><section className="contact-faq"><div><span className="eyebrow">Frequently asked</span><h2>Questions,<br /><em>answered.</em></h2></div><div className="faq-list">{faqs.map((faq, index) => <details key={faq}><summary><span>0{index + 1}</span>{faq}<ArrowRight /></summary><p>We&apos;re happy to help. Send us a note and our customer care team will share the clearest answer for your order.</p></details>)}</div></section><section className="contact-trust"><div><Truck /><span><strong>Complimentary shipping</strong><small>On orders over ₹3,000</small></span></div><div><ShieldCheck /><span><strong>Easy returns</strong><small>14 days, no questions</small></span></div><div><Mail /><span><strong>Personal support</strong><small>Real people, thoughtful replies</small></span></div></section><section className="contact-cta"><span className="eyebrow">Need styling advice?</span><h2>Let&apos;s find your<br /><em>next favourite.</em></h2><Link href="/collection" className="button button-light">Explore the collection <ArrowRight /></Link></section></main>
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!name || !email || !message) return
+    setSubmitted(true)
+    showToast('Your note has been received by our studio')
+  }
+
+  return (
+    <main className="bg-[#181716] text-[#f4efe9] min-h-screen py-14 sm:py-20">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        {/* Page H1 */}
+        <div className="pb-8 border-b border-[#292724] mb-12">
+          <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#c9b293] block mb-1">
+            Care &amp; Inquiries
+          </span>
+          <h1 className="text-4xl sm:text-5xl font-serif text-[#f4efe9]">
+            Contact the studio
+          </h1>
+          <p className="text-sm font-sans text-[#a7a299] mt-2">
+            Questions regarding sizing, fabric, or visiting our Chennai salon.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+          {/* Inquiry Form Section (H2) */}
+          <section className="p-6 sm:p-8 bg-[#201f1c] border border-[#2f2d29] rounded-3xl" aria-labelledby="inquiry-form-heading">
+            <h2 id="inquiry-form-heading" className="text-xs font-mono uppercase tracking-wider text-[#c9b293] mb-4">
+              Send an Inquiry
+            </h2>
+
+            {submitted ? (
+              <div className="text-center py-8 space-y-3">
+                <div className="w-10 h-10 rounded-full bg-[#c9b293]/15 text-[#c9b293] flex items-center justify-center mx-auto">
+                  <Check className="w-5 h-5" />
+                </div>
+                <h3 className="text-lg font-serif text-white">Thank you, {name}</h3>
+                <p className="text-xs font-sans text-[#a7a299]">
+                  We will reply to your note within one business day.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4 text-xs font-mono">
+                <div>
+                  <label className="text-[#a7a299] block mb-1">Client Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                    className="w-full p-3 bg-[#181716] border border-[#33312c] text-white rounded-xl focus:outline-none focus:border-[#c9b293]"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[#a7a299] block mb-1">Email Address</label>
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    className="w-full p-3 bg-[#181716] border border-[#33312c] text-white rounded-xl focus:outline-none focus:border-[#c9b293]"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[#a7a299] block mb-1">Message</label>
+                  <textarea
+                    required
+                    rows={4}
+                    value={message}
+                    onChange={e => setMessage(e.target.value)}
+                    placeholder="Tell us what you need assistance with..."
+                    className="w-full p-3 bg-[#181716] border border-[#33312c] text-white rounded-xl focus:outline-none focus:border-[#c9b293] font-sans"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3.5 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-semibold uppercase tracking-wider rounded-full transition-colors"
+                >
+                  Send Message
+                </button>
+              </form>
+            )}
+          </section>
+
+          {/* Salon Details Section (H2 -> H3) */}
+          <section className="space-y-6 text-xs font-sans text-[#a7a299]" aria-labelledby="salon-details-heading">
+            <h2 id="salon-details-heading" className="text-xs font-mono uppercase tracking-wider text-[#c9b293]">
+              Flagship Salon &amp; Concierge
+            </h2>
+
+            <div className="space-y-1">
+              <h3 className="text-sm font-serif text-white block">Email Concierge</h3>
+              <p className="font-mono text-[#c9b293]">hello@aurorastudio.in</p>
+            </div>
+
+            <div className="space-y-1">
+              <h3 className="text-sm font-serif text-white block">Studio Telephone</h3>
+              <p className="font-mono text-[#c9b293]">+91 44 2833 4900</p>
+            </div>
+
+            <div className="space-y-1">
+              <h3 className="text-sm font-serif text-white block">Chennai Salon Location</h3>
+              <p>Khader Nawaz Khan Road, Nungambakkam</p>
+              <p>Chennai, Tamil Nadu 600006</p>
+              <p className="font-mono text-[11px] text-[#78736b] pt-1">Mon–Sat / 10am–7pm</p>
+            </div>
+
+            <div className="pt-4 border-t border-[#292724] space-y-2 text-xs">
+              <h3 className="text-sm font-serif text-white block">Returns &amp; Courier Exchanges</h3>
+              <p>
+                We accept exchanges and returns within 14 days of receipt. Doorstep pickup is complimentary across India.
+              </p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  )
 }

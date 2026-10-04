@@ -1,20 +1,124 @@
 'use client'
 
+import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { motion } from 'motion/react'
 import { ArrowRight } from 'lucide-react'
-import { StoreHeader } from './storefront-pages'
 
-const timeline = [
-  { year: '2018', title: 'The beginning', text: 'Aurora began with an instinct to make clothing that felt calm, intentional and enduring.', image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=85' },
-  { year: '2020', title: 'The beginning', text: 'We refined our materials and began building a slower, more considered wardrobe.', image: 'https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=1200&q=85' },
-  { year: '2022', title: 'Small beginnings', text: 'A small studio became a close community of makers, customers and collaborators.', image: 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=85' },
-  { year: '2024', title: 'Quiet progress', text: 'Every collection became a study in proportion, texture and the rituals of everyday life.', image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85' },
-  { year: '2026', title: 'Still making', text: 'The work continues: fewer, better pieces made with patience and purpose.', image: 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=85' },
+const milestones = [
+  {
+    year: '2020',
+    title: 'Conception',
+    description: 'Began in Chennai with a focus on relaxed, architectural tailoring in Belgian flax.',
+    image: '/images/real-craft.jpg'
+  },
+  {
+    year: '2023',
+    title: 'Raw Silk & Linen',
+    description: 'Refined local sourcing with heritage handloom weavers and unadulterated threads.',
+    image: '/images/real-shirt.jpg'
+  },
+  {
+    year: '2026',
+    title: 'The Modern Studio',
+    description: 'Every garment remains numbered and cut in limited micro-batches of thirty to fifty.',
+    image: '/images/real-hero.jpg'
+  }
 ]
 
-const values = [['Sustainability', 'Thoughtful materials and lower-impact choices.'], ['Fair trade', 'A fairer relationship with every maker.'], ['Quality', 'Clothing designed to be lived in for years.']]
-
 export function StoryPage() {
-  return <main className="story-page"><StoreHeader /><section className="story-hero"><Image src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85" alt="Aurora woman wearing a considered everyday look" fill priority sizes="100vw" /><div className="story-hero-overlay"><span className="eyebrow">Aurora / Our story</span><h1>Clothing for the quiet rhythm<br /><em>of everyday life.</em></h1><Link href="/collection" className="story-scroll">Scroll to explore <ArrowRight /></Link></div></section><section className="story-intro story-split"><div className="story-blob"><Image src="/images/editorial-portrait.png" alt="Aurora studio portrait" fill sizes="(max-width: 767px) 100vw, 45vw" /></div><div><span className="eyebrow">The dressing ritual</span><h2>We believe clothing is a daily practice, not a performance.</h2><p>Our pieces are designed to move with you: considered in proportion, tactile in feeling and quietly expressive.</p><Link href="/collection" className="text-link">Explore the collection <ArrowRight /></Link></div></section><section className="story-timeline"><div className="story-section-title"><span className="eyebrow">Our journey</span><h2>Made slowly.<br /><em>Still becoming.</em></h2></div><div className="timeline-list">{timeline.map(item => <article className="timeline-item" key={item.year}><div className="timeline-year">{item.year}</div><div className="timeline-dot" /><div className="timeline-image"><Image src={item.image} alt={item.title} fill sizes="120px" /></div><div className="timeline-copy"><h3>{item.title}</h3><p>{item.text}</p></div></article>)}</div></section><section className="story-values"><div className="story-section-title"><span className="eyebrow">What we believe in</span><h2>Values that<br /><em>hold us.</em></h2></div><div className="value-grid">{values.map(([title, text]) => <article key={title}><span className="value-number">0{values.findIndex(value => value[0] === title) + 1}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section><section className="craft-section"><div className="craft-image"><Image src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85" alt="Aurora garments being made in the studio" fill sizes="100vw" /></div><div className="craft-copy"><span className="eyebrow">Craftsmanship</span><h2>Handcrafted<br /><em>with love.</em></h2><p>Every stitch, seam and finish is part of a slower process. We work with skilled makers who understand that the smallest details shape how a garment feels.</p><Link href="/collection" className="text-link">Meet the collection <ArrowRight /></Link></div></section><section className="makers-section"><div className="story-section-title"><span className="eyebrow">Our people</span><h2>Meet the<br /><em>makers.</em></h2></div><div className="maker-grid">{['Priya / Founder','Ananya / Studio','Vee / Production','Kerry / Customer care'].map((maker, index) => <article key={maker}><div className="maker-image"><Image src={['/images/editorial-portrait.png','/images/city-look.png','https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=1200&q=85','/images/soft-tailoring.png'][index]} alt={maker} fill sizes="180px" /></div><span>{maker}</span></article>)}</div></section><section className="impact-section"><span className="eyebrow">Our impact</span><div className="impact-grid">{[['10,000+', 'Happy customers'], ['100%', 'Thoughtful fabrics'], ['50+', 'Artisans enjoyed'], ['100%', 'Carbon neutral']].map(([number, label]) => <div key={label}><strong>{number}</strong><span>{label}</span></div>)}</div></section><section className="story-newsletter"><span className="eyebrow">Ready to be part of the story?</span><h2>Join the inner<br /><em>circle.</em></h2><form onSubmit={event => event.preventDefault()}><input type="email" aria-label="Email address" placeholder="Your email address" /><button type="submit">Subscribe <ArrowRight /></button></form></section></main>
+  return (
+    <main className="bg-[#181716] text-[#f4efe9] min-h-screen">
+      {/* Hero */}
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden border-b border-[#292724]">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/real-hero.jpg"
+            alt="Aurora Studio"
+            fill
+            priority
+            className="object-cover filter brightness-[0.5]"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#181716] via-[#181716]/40 to-transparent" />
+        </div>
+
+        <div className="relative z-10 max-w-2xl mx-auto px-4 text-center space-y-3">
+          <span className="text-[10px] font-mono uppercase tracking-[0.24em] text-[#c9b293]">
+            Our Story
+          </span>
+          <h1 className="text-4xl sm:text-5xl font-serif text-[#f4efe9]">
+            Clothing made with <em>patience.</em>
+          </h1>
+          <p className="text-sm font-sans text-[#cfcac2] max-w-md mx-auto">
+            A wardrobe of considered silhouettes and tactile natural fibers, designed in Chennai.
+          </p>
+        </div>
+      </section>
+
+      {/* Philosophy */}
+      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+          <div className="md:col-span-6 relative aspect-[4/3] bg-[#201f1c] border border-[#2f2d29] overflow-hidden rounded-sm">
+            <Image
+              src="/images/real-dress.jpg"
+              alt="Silk silhouette"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
+
+          <div className="md:col-span-6 space-y-4">
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#c9b293]">
+              The approach
+            </span>
+            <h2 className="text-3xl font-serif text-[#f4efe9]">
+              Quiet forms. <br />
+              <em className="text-[#c9b293]">Enduring presence.</em>
+            </h2>
+            <p className="text-sm font-sans text-[#a7a299] leading-relaxed">
+              We design pieces to move with you through the day. Linen that softens with washing, pure silk that drapes naturally, and seams constructed to last for years.
+            </p>
+            <div className="pt-2">
+              <Link
+                href="/collection"
+                className="text-xs font-mono uppercase tracking-widest text-[#c9b293] hover:underline"
+              >
+                View collection →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Milestones */}
+      <section className="py-20 bg-[#1d1c1a] border-y border-[#292724]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-10">
+          <h2 className="text-2xl font-serif text-[#f4efe9] text-center">Studio milestones</h2>
+
+          <div className="space-y-8">
+            {milestones.map((m, i) => (
+              <div
+                key={m.year}
+                className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center border-b border-[#2b2926] pb-6"
+              >
+                <div className="sm:col-span-2 text-2xl font-serif text-[#c9b293]">
+                  {m.year}
+                </div>
+                <div className="sm:col-span-4 relative aspect-[4/3] bg-[#22211e] overflow-hidden rounded-sm">
+                  <Image src={m.image} alt={m.title} fill className="object-cover" sizes="160px" />
+                </div>
+                <div className="sm:col-span-6 space-y-1">
+                  <h3 className="text-lg font-serif text-[#f4efe9]">{m.title}</h3>
+                  <p className="text-xs font-sans text-[#9c978f] leading-relaxed">{m.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  )
 }

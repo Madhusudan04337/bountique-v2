@@ -1,6 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
+
+@theme {
+  --font-serif: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-manrope), Arial, sans-serif;
+  --font-mono: var(--font-dm-mono), monospace;
+}
 
 :root {
   /* Warm Dark Espresso & Atelier Linen Palette */
@@ -16,9 +21,22 @@
   --accent-light: #dfcaa8;
 
   /* Typography System */
-  --font-heading: 'Playfair Display', Georgia, serif;
-  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'DM Mono', monospace;
+  --font-serif: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-manrope), Arial, sans-serif;
+  --font-mono: var(--font-dm-mono), monospace;
+  --font-heading: var(--font-serif);
+  --font-body: var(--font-sans);
+
+  /* Typographic Scale Tokens */
+  --text-display: clamp(3.5rem, 9vw, 9rem);
+  --text-h1: clamp(2.75rem, 6vw, 6rem);
+  --text-h2: clamp(2rem, 4vw, 4rem);
+  --text-h3: clamp(1.5rem, 2.5vw, 2.5rem);
+  --text-body: 1rem;
+  --text-small: 0.8125rem;
+  --tracking-label: 0.14em;
+  --tracking-wordmark: 0.25em;
+
   --ease-smooth: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
@@ -128,6 +146,13 @@ h1, h2, h3, h4, h5, h6 {
 /* Ambient Subtle Glow */
 .ambient-glow {
   box-shadow: 0 0 60px -20px rgba(201, 178, 147, 0.12);
+}
+
+/* Modal & Drawer Scroll Containment */
+.modal-content {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  max-height: 90dvh;
 }
 
 @media (prefers-reduced-motion: reduce) {

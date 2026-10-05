@@ -49,6 +49,16 @@ const articles: Article[] = [
 export function JournalPage() {
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null)
 
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && selectedArticle) {
+        setSelectedArticle(null)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [selectedArticle])
+
   return (
     <main className="bg-[#181716] text-[#f4efe9] min-h-screen py-16 sm:py-24 selection:bg-[#c9b293] selection:text-[#181716]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -119,7 +129,7 @@ export function JournalPage() {
       {/* Reader Modal */}
       <AnimatePresence>
         {selectedArticle && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="journal-reader-title">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -131,7 +141,9 @@ export function JournalPage() {
               initial={{ scale: 0.95, opacity: 0, y: 10 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 10 }}
-              className="relative z-10 w-full max-w-2xl bg-[#201f1c] border border-[#38352f] p-6 sm:p-8 rounded-[2.5rem] text-left space-y-6 shadow-2xl max-h-[90vh] overflow-y-auto"
+              transition={{ duration: 0.45, ease: [0.19, 1, 0.22, 1] }}
+              className="relative z-10 w-full max-w-2xl bg-[#201f1c] border border-[#38352f] p-6 sm:p-8 rounded-[2.5rem] text-left space-y-6 shadow-2xl max-h-[90dvh] overflow-y-auto overscroll-contain modal-content"
+              data-native-scroll="true"
             >
               <div className="flex justify-between items-center pb-3 border-b border-[#2e2c28]">
                 <div className="flex items-center gap-2 text-xs font-mono text-[#c9b293]">

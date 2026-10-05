@@ -11,6 +11,9 @@ import { SplitShowcase } from '@/components/split-showcase'
 import { RunwayCarousel } from '@/components/runway-carousel'
 import { EditorialPress } from '@/components/editorial-press'
 import { AtelierButton, AtelierBadge, SectionHeader, OrganicCard } from '@/components/ui-kit'
+import { HeroParallax } from '@/components/storytelling/hero-parallax'
+import { PinnedStorySection } from '@/components/storytelling/pinned-story'
+import { HorizontalGallery } from '@/components/storytelling/horizontal-gallery'
 
 const pillars = [
   {
@@ -58,67 +61,8 @@ export default function HomePage() {
 
   return (
     <main className="bg-[#181716] text-[#f4efe9] overflow-x-hidden selection:bg-[#c9b293] selection:text-[#181716]">
-      {/* 1. CINEMATIC HERO (Page H1 with Organic Curved Bottom Wave) */}
-      <section className="relative min-h-[75vh] sm:min-h-[85vh] lg:min-h-[88vh] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-10 pb-20 sm:pb-28">
-        {/* Background Image with Layered Vignette */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/real-hero.jpg"
-            alt="Aurora High Summer Editorial"
-            fill
-            priority
-            className="object-cover object-[center_35%] filter brightness-[0.68] contrast-[1.05]"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#181716] via-[#181716]/30 to-black/40" />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto w-full pt-4 sm:pt-8">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
-            className="max-w-xl space-y-5 sm:space-y-6"
-          >
-            <div>
-              <AtelierBadge variant="gold" icon={Sparkles}>
-                High Summer Edit · 2026
-              </AtelierBadge>
-            </div>
-
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif text-[#f4efe9] leading-[1.06] tracking-tight">
-              Quiet forms. <br />
-              <em className="text-[#c9b293] font-normal italic">Sculpted drape.</em>
-            </h1>
-
-            <p className="text-sm sm:text-base font-sans text-[#cfcac2] max-w-md leading-relaxed prose-readable">
-              Belgian flax linen and raw mulberry silk, cut in unhurried limited editions inside our Chennai atelier.
-            </p>
-
-            <div className="pt-2 flex flex-col sm:flex-row gap-2.5 sm:gap-4 items-stretch sm:items-center">
-              <AtelierButton
-                href="/collection"
-                variant="primary"
-                size="md"
-                icon={ArrowRight}
-              >
-                Explore Silhouettes
-              </AtelierButton>
-
-              <AtelierButton
-                onClick={() => setIsProvenanceModalOpen(true)}
-                variant="glass"
-                size="md"
-                icon={Compass}
-                iconPosition="left"
-              >
-                Textile Provenance
-              </AtelierButton>
-            </div>
-          </motion.div>
-        </div>
-
-      </section>
+      {/* 1. CINEMATIC HERO (GSAP Parallax with Editorial Reveal) */}
+      <HeroParallax />
 
       {/* 2. ATELIER COMMITMENTS & CLIENT PRIVILEGES (Compact 2x2 on Mobile / 4-Col on Desktop) */}
       <section className="relative bg-[#1a1917] py-8 sm:py-12 px-4 sm:px-6 lg:px-8 -mt-1" aria-label="Atelier Commitments">
@@ -248,6 +192,12 @@ export default function HomePage() {
 
       {/* 6. INTERACTIVE RUNWAY CAROUSEL */}
       <RunwayCarousel />
+
+      {/* 7. PINNED ATELIER STORY CHAPTERS (GSAP ScrollTrigger) */}
+      <PinnedStorySection />
+
+      {/* 8. ATELIER JOURNAL HORIZONTAL DISPATCH (GSAP ScrollTrigger) */}
+      <HorizontalGallery />
 
       {/* 7. TEXTILE PROVENANCE & SALON INVITATION */}
       <section className="relative py-20 sm:py-28 bg-[#191817] overflow-hidden" aria-labelledby="atelier-services-heading">

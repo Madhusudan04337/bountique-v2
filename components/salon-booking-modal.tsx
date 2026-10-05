@@ -17,6 +17,16 @@ export function SalonBookingModal() {
   const [notes, setNotes] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isSalonModalOpen) {
+        setIsSalonModalOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isSalonModalOpen, setIsSalonModalOpen])
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!name || !email || !phone) return
@@ -54,7 +64,9 @@ export function SalonBookingModal() {
               initial={{ scale: 0.95, opacity: 0, y: 12 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 12 }}
-              className="relative z-10 w-full max-w-2xl bg-[#201f1c] border border-[#3b3832] text-[#f4efe9] rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
+              transition={{ duration: 0.45, ease: [0.19, 1, 0.22, 1] }}
+              className="relative z-10 w-full max-w-2xl bg-[#201f1c] border border-[#3b3832] text-[#f4efe9] rounded-2xl shadow-2xl max-h-[90dvh] overflow-y-auto overscroll-contain modal-content"
+              data-native-scroll="true"
             >
               {/* Header Visual */}
               <div className="relative h-44 w-full bg-[#181716] overflow-hidden">

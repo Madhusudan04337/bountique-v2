@@ -25,6 +25,16 @@ export function CartDrawer() {
 
   const [couponInput, setCouponInput] = useState('')
 
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isCartOpen) {
+        setIsCartOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isCartOpen, setIsCartOpen])
+
   const remainingForFree = Math.max(0, FREE_SHIPPING_THRESHOLD - cartSubtotal)
   const finalTotal = Math.max(0, cartSubtotal - discountAmount)
 
@@ -42,6 +52,7 @@ export function CartDrawer() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
             onClick={() => setIsCartOpen(false)}
             className="fixed inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"
           />
@@ -51,7 +62,7 @@ export function CartDrawer() {
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              transition={{ duration: 0.45, ease: [0.19, 1, 0.22, 1] }}
               className="w-screen max-w-md bg-[#1d1c1a] border-l border-[#33312c] text-[#f4efe9] flex flex-col shadow-2xl"
             >
               {/* Header (H2 Dialog Title) */}
@@ -77,7 +88,7 @@ export function CartDrawer() {
               </div>
 
               {/* Items List (H3 items) */}
-              <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4 divide-y divide-[#2a2824]">
+              <div data-native-scroll="true" className="flex-1 overflow-y-auto overscroll-contain modal-content px-6 py-4 space-y-4 divide-y divide-[#2a2824]">
                 {cart.length === 0 ? (
                   <div className="h-48 flex flex-col items-center justify-center text-center text-sm text-[#8c877f]">
                     <p className="font-serif">Your bag is empty.</p>

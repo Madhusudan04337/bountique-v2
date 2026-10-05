@@ -45,7 +45,7 @@ export function ProductCard({
 
   return (
     <article
-      className="group relative flex flex-col bg-[#201f1c] border border-[#35332e] hover:border-[#c9b293]/60 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+      className="group relative flex flex-col bg-[#201f1c] border border-[#35332e] hover:border-[#c9b293]/60 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-[600ms] ease-[cubic-bezier(0.19,1,0.22,1)] hover:-translate-y-1"
       onMouseLeave={() => setShowQuickAdd(false)}
     >
       {/* Product Image Container */}
@@ -56,7 +56,7 @@ export function ProductCard({
             alt={product.name}
             fill
             priority={priority}
-            className="object-cover transition-transform duration-500 ease-out group-hover:scale-105 filter brightness-[0.94] contrast-[1.02]"
+            className="object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.03] filter brightness-[0.94] contrast-[1.02]"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           />
         </Link>

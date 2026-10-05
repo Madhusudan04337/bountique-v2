@@ -35,7 +35,7 @@ export function MobileNav() {
           aria-label="Atelier Home"
         >
           <Home className="w-4 h-4" />
-          <span className="text-[9px] font-mono tracking-wider mt-1 uppercase">Home</span>
+          <span className="text-[10px] font-sans tracking-wider mt-1 uppercase font-medium">Home</span>
         </Link>
 
         {/* 2. Collection */}
@@ -47,7 +47,7 @@ export function MobileNav() {
           aria-label="Silhouettes Collection"
         >
           <Compass className="w-4 h-4" />
-          <span className="text-[9px] font-mono tracking-wider mt-1 uppercase">Catalog</span>
+          <span className="text-[10px] font-sans tracking-wider mt-1 uppercase font-medium">Catalog</span>
         </Link>
 
         {/* 3. Search Trigger */}
@@ -58,7 +58,7 @@ export function MobileNav() {
           aria-label="Search Collection"
         >
           <Search className="w-4 h-4" />
-          <span className="text-[9px] font-mono tracking-wider mt-1 uppercase">Search</span>
+          <span className="text-[10px] font-sans tracking-wider mt-1 uppercase font-medium">Search</span>
         </button>
 
         {/* 4. Wishlist */}
@@ -77,7 +77,7 @@ export function MobileNav() {
               </span>
             )}
           </div>
-          <span className="text-[9px] font-mono tracking-wider mt-1 uppercase">Saved</span>
+          <span className="text-[10px] font-sans tracking-wider mt-1 uppercase font-medium">Saved</span>
         </Link>
 
         {/* 5. Bag */}
@@ -95,7 +95,7 @@ export function MobileNav() {
               </span>
             )}
           </div>
-          <span className="text-[9px] font-mono tracking-wider mt-1 uppercase">Bag</span>
+          <span className="text-[10px] font-sans tracking-wider mt-1 uppercase font-medium">Bag</span>
         </button>
       </nav>
     </div>

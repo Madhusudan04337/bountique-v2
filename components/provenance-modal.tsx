@@ -9,6 +9,16 @@ import { useStore } from '@/lib/store'
 export function ProvenanceModal() {
   const { isProvenanceModalOpen, setIsProvenanceModalOpen } = useStore()
 
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isProvenanceModalOpen) {
+        setIsProvenanceModalOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isProvenanceModalOpen, setIsProvenanceModalOpen])
+
   return (
     <AnimatePresence>
       {isProvenanceModalOpen && (
@@ -26,7 +36,9 @@ export function ProvenanceModal() {
               initial={{ scale: 0.95, opacity: 0, y: 12 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 12 }}
-              className="relative z-10 w-full max-w-2xl bg-[#201f1c] border border-[#3b3832] text-[#f4efe9] rounded-2xl shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto"
+              transition={{ duration: 0.45, ease: [0.19, 1, 0.22, 1] }}
+              className="relative z-10 w-full max-w-2xl bg-[#201f1c] border border-[#3b3832] text-[#f4efe9] rounded-2xl shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90dvh] overflow-y-auto overscroll-contain modal-content"
+              data-native-scroll="true"
             >
               <div className="flex justify-between items-start border-b border-[#2e2c28] pb-4">
                 <div>

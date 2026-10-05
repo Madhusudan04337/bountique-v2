@@ -56,8 +56,8 @@ export function SearchModal() {
               initial={{ opacity: 0, y: -15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.2 }}
-              className="w-full max-w-xl bg-[#1e1d1a] border border-[#36342f] text-[#f4efe9] p-6 shadow-2xl relative z-10 text-left rounded-3xl max-h-[85vh] overflow-y-auto"
+              className="w-full max-w-xl bg-[#1e1d1a] border border-[#36342f] text-[#f4efe9] p-6 shadow-2xl relative z-10 text-left rounded-3xl max-h-[85vh] overflow-y-auto overscroll-contain modal-content"
+              data-native-scroll="true"
             >
               <h2 id="search-modal-title" className="sr-only">
                 Search Boutique Pieces

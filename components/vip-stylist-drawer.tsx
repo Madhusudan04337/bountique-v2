@@ -14,6 +14,16 @@ export function VipStylistDrawer() {
   const [message, setMessage] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isStylistDrawerOpen) {
+        setIsStylistDrawerOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isStylistDrawerOpen, setIsStylistDrawerOpen])
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!clientName || !clientPhone) return
@@ -39,6 +49,7 @@ export function VipStylistDrawer() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
             onClick={() => setIsStylistDrawerOpen(false)}
             className="fixed inset-0 bg-black/70 backdrop-blur-sm cursor-pointer"
           />
@@ -48,8 +59,9 @@ export function VipStylistDrawer() {
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="w-screen max-w-md bg-[#1e1d1a] border-l border-[#33312c] text-[#f4efe9] flex flex-col shadow-2xl justify-between overflow-y-auto max-h-screen"
+              transition={{ duration: 0.45, ease: [0.19, 1, 0.22, 1] }}
+              className="w-screen max-w-md bg-[#1e1d1a] border-l border-[#33312c] text-[#f4efe9] flex flex-col shadow-2xl justify-between overflow-y-auto overscroll-contain modal-content max-h-screen"
+              data-native-scroll="true"
             >
               <div>
                 {/* Header */}

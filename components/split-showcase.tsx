@@ -32,19 +32,19 @@ export function SplitShowcase() {
           </div>
 
           {/* Silhouette Selector Tabs */}
-          <div className="flex items-center gap-1.5 p-1 bg-[#201f1c]/90 backdrop-blur-md rounded-full border border-[#36342e] shadow-xl overflow-x-auto pb-0.5 scrollbar-none self-start sm:self-auto">
+          <div className="flex items-center gap-1.5 p-1 bg-[#201f1c] rounded-full border border-[#36342e] shadow-xl overflow-x-auto pb-0.5 scrollbar-none self-start sm:self-auto">
             {showcaseProducts.map((p, i) => (
               <button
                 key={p.id}
                 type="button"
                 onClick={() => setActiveIndex(i)}
-                className={`px-3.5 sm:px-5 py-1.5 sm:py-2 text-xs font-mono rounded-full transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 ${
+                className={`px-3.5 sm:px-5 py-1.5 sm:py-2 text-xs font-sans font-medium rounded-full transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 ${
                   activeIndex === i
-                    ? 'bg-[#c9b293] text-[#181716] font-semibold shadow-[0_0_15px_rgba(201,178,147,0.3)] scale-[1.02]'
+                    ? 'bg-[#c9b293] text-[#181716] font-semibold shadow-[0_0_15px_rgba(201,178,147,0.3)]'
                     : 'text-[#a7a297] hover:text-white hover:bg-[#282622]'
                 }`}
               >
-                0{i + 1} · {p.name.replace('The ', '')}
+                {p.name.replace('The ', '')}
               </button>
             ))}
           </div>
@@ -52,26 +52,26 @@ export function SplitShowcase() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-14 items-start">
           {/* Left: Product Information & Purchase CTAs */}
-          <div key={`info-${current.id}`} className="lg:col-span-5 space-y-5 lg:sticky lg:top-28 animate-in fade-in duration-300">
-            <div className="p-5 sm:p-7 bg-gradient-to-b from-[#22211e]/95 via-[#1e1d1a]/90 to-[#191817] border border-[#38352f] rounded-3xl space-y-4 sm:space-y-5 shadow-2xl backdrop-blur-md relative overflow-hidden">
+          <div key={`info-${current.id}`} className="lg:col-span-5 space-y-5 lg:sticky lg:top-28">
+            <div className="p-5 sm:p-7 bg-[#21201d] border border-[#38352f] rounded-3xl space-y-4 sm:space-y-5 shadow-2xl relative overflow-hidden">
               <div>
-                <div className="flex justify-between items-center text-xs font-mono text-[#8f8a81] mb-1">
-                  <span className="uppercase tracking-wider">{current.category} · {current.origin}</span>
-                  <span className="text-[#c9b293] font-medium">{current.batchNumber}</span>
+                <div className="flex justify-between items-center text-xs font-sans text-[#8f8a81] mb-1">
+                  <span className="uppercase tracking-wider font-medium">{current.category} · {current.origin}</span>
+                  <span className="text-[#c9b293] font-mono font-medium">{current.batchNumber}</span>
                 </div>
                 <h3 className="text-xl sm:text-3xl font-serif text-[#f4efe9] leading-tight">
                   {current.name}
                 </h3>
-                <div className="flex items-baseline gap-2.5 mt-2 text-sm font-mono">
-                  <span className="text-xl sm:text-2xl text-[#f4efe9] font-medium tabular-nums">
+                <div className="flex items-baseline gap-2.5 mt-2 text-sm font-sans">
+                  <span className="text-xl sm:text-2xl text-[#f4efe9] font-medium tabular-nums font-mono">
                     {formatMoney(current.price)}
                   </span>
                   {current.originalPrice && (
-                    <span className="text-xs text-[#78736b] line-through">
+                    <span className="text-xs text-[#78736b] line-through font-mono">
                       {formatMoney(current.originalPrice)}
                     </span>
                   )}
-                  <span className="text-xs text-[#e89069] ml-auto">
+                  <span className="text-xs text-[#e89069] ml-auto font-medium">
                     Only {current.stockRemaining} left in edition
                   </span>
                 </div>
@@ -82,9 +82,9 @@ export function SplitShowcase() {
               </p>
 
               {/* Craft Highlights */}
-              <div className="p-3 sm:p-3.5 bg-[#181716]/80 border border-[#312f2a] rounded-2xl space-y-1.5">
+              <div className="p-3 sm:p-3.5 bg-[#181716] border border-[#312f2a] rounded-2xl space-y-1.5">
                 <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#c9b293] block">
+                  <span className="text-[11px] font-sans font-medium uppercase tracking-wider text-[#c9b293] block">
                     {current.masterTailor} · {current.silhouetteFit}
                   </span>
                 </div>
@@ -110,7 +110,7 @@ export function SplitShowcase() {
                     size="md"
                     fullWidth
                   >
-                    Quick Add Size S
+                    Add to Bag
                   </AtelierButton>
 
                   <AtelierIconButton
@@ -124,7 +124,7 @@ export function SplitShowcase() {
 
                   <Link
                     href={`/product/${current.slug}`}
-                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-[#38352f] bg-[#181716]/85 hover:border-[#c9b293] text-[#a7a297] hover:text-white transition-colors shrink-0 flex items-center justify-center cursor-pointer shadow-sm"
+                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-[#38352f] bg-[#181716] hover:border-[#c9b293] text-[#a7a297] hover:text-white transition-colors shrink-0 flex items-center justify-center cursor-pointer shadow-sm"
                     aria-label="View piece details"
                   >
                     <ArrowRight className="w-4 h-4" />
@@ -134,7 +134,7 @@ export function SplitShowcase() {
                 <button
                   type="button"
                   onClick={() => setIsStylistDrawerOpen(true)}
-                  className="w-full py-2 px-3 bg-[#1e1d1a]/80 hover:bg-[#252420] border border-[#33312c] rounded-full text-[11px] font-mono text-[#c9b293] flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                  className="w-full py-2.5 px-4 bg-[#1e1d1a] hover:bg-[#252420] border border-[#33312c] rounded-full text-xs font-sans font-medium text-[#c9b293] flex items-center justify-center gap-2 transition-colors cursor-pointer"
                 >
                   <MessageSquare className="w-3.5 h-3.5 shrink-0" />
                   <span>Consult Head Stylist on WhatsApp</span>

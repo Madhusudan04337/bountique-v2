@@ -7,6 +7,7 @@ import {
   Search,
   Heart,
   ShoppingBag,
+  User as UserIcon,
   Menu,
   X,
   Compass,
@@ -26,7 +27,10 @@ export function SiteHeader() {
     setIsSearchOpen,
     setIsSalonModalOpen,
     setIsProvenanceModalOpen,
-    setIsStylistDrawerOpen
+    setIsStylistDrawerOpen,
+    user,
+    setIsAuthModalOpen,
+    setAuthModalMode
   } = useStore()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -125,21 +129,48 @@ export function SiteHeader() {
             </button>
           </nav>
 
-          {/* Right: Actions (Search, Wishlist, Bag) */}
+          {/* Right: Actions (Desktop has full tools; Mobile keeps clean Bag) */}
           <div className="flex items-center gap-1.5 sm:gap-3">
+            {/* Search: Desktop only (Mobile has dedicated bottom search tab) */}
             <button
               type="button"
               onClick={() => setIsSearchOpen(true)}
-              className="p-2 sm:px-3.5 sm:py-2 rounded-full border border-[#38352f] bg-[#201f1c] hover:border-[#c9b293] text-[#b5b0a6] hover:text-white transition-colors flex items-center gap-2 cursor-pointer shadow-sm"
+              className="hidden md:flex p-2 sm:px-3.5 sm:py-2 rounded-full border border-[#38352f] bg-[#201f1c] hover:border-[#c9b293] text-[#b5b0a6] hover:text-white transition-colors items-center gap-2 cursor-pointer shadow-sm"
               aria-label="Search Collection"
             >
               <Search className="w-4 h-4 text-[#c9b293]" />
-              <span className="hidden md:inline text-[11px] font-mono tracking-wider">Search</span>
+              <span className="text-[11px] font-mono tracking-wider">Search</span>
             </button>
 
+            {/* Account / Client Circle Button: Desktop only (Mobile has dedicated bottom account tab) */}
+            {user ? (
+              <Link
+                href="/account"
+                className="hidden md:flex relative p-2 sm:px-3 sm:py-2 rounded-full border border-[#38352f] bg-[#201f1c] hover:border-[#c9b293] text-[#f4efe9] transition-colors items-center gap-1.5 cursor-pointer shadow-sm group"
+                aria-label="Atelier Account"
+              >
+                <div className="w-4 h-4 rounded-full bg-[#c9b293] text-[#181716] text-[9px] font-mono font-bold flex items-center justify-center">
+                  {user.firstName[0]}
+                </div>
+                <span className="hidden lg:inline text-[11px] font-sans font-medium text-[#cfcac2] group-hover:text-white">
+                  {user.firstName}
+                </span>
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="hidden md:flex p-2 sm:px-3 sm:py-2 rounded-full border border-[#38352f] bg-[#201f1c] hover:border-[#c9b293] text-[#b5b0a6] hover:text-white transition-colors items-center gap-1.5 cursor-pointer shadow-sm"
+                aria-label="Sign In or Join Circle"
+              >
+                <UserIcon className="w-4 h-4 text-[#c9b293]" />
+                <span className="hidden lg:inline text-[11px] font-sans font-medium">Sign In</span>
+              </Link>
+            )}
+
+            {/* Saved / Wishlist: Desktop only (Mobile has dedicated bottom saved tab) */}
             <Link
-              href="/collection"
-              className="relative p-2 sm:p-2.5 rounded-full border border-[#38352f] bg-[#201f1c] hover:border-[#c9b293] text-[#b5b0a6] hover:text-white transition-colors cursor-pointer"
+              href="/wishlist"
+              className="hidden md:flex relative p-2 sm:p-2.5 rounded-full border border-[#38352f] bg-[#201f1c] hover:border-[#c9b293] text-[#b5b0a6] hover:text-white transition-colors cursor-pointer"
               aria-label="Saved Pieces"
             >
               <Heart className="w-4 h-4" />
@@ -178,13 +209,22 @@ export function SiteHeader() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-[65px] z-50 bg-[#181716]/98 border-b border-[#2d2a26] p-6 shadow-2xl backdrop-blur-xl lg:hidden"
+            className="fixed inset-x-0 top-[65px] z-50 bg-[#181716] border-b border-[#2d2a26] p-6 shadow-2xl lg:hidden"
           >
-            <div className="flex flex-col space-y-4 max-w-sm mx-auto text-center">
+            <div className="flex flex-col space-y-3.5 max-w-sm mx-auto text-center">
+              <Link
+                href={user ? '/account' : '/login'}
+                onClick={() => setMobileMenuOpen(false)}
+                className="py-2 text-xs font-sans uppercase tracking-wider text-[#c9b293] hover:text-white border-b border-[#282622] flex items-center justify-between"
+              >
+                <span>{user ? `Account (${user.firstName})` : 'Client Sign In / Register'}</span>
+                <UserIcon className="w-4 h-4" />
+              </Link>
+
               <Link
                 href="/collection"
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-2.5 text-sm font-mono uppercase tracking-widest text-[#f4efe9] hover:text-[#c9b293] border-b border-[#282622]"
+                className="py-2 text-xs font-sans uppercase tracking-wider text-[#f4efe9] hover:text-[#c9b293] border-b border-[#282622]"
               >
                 Catalog Collection
               </Link>
@@ -192,7 +232,7 @@ export function SiteHeader() {
               <Link
                 href="/story"
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-2.5 text-sm font-mono uppercase tracking-widest text-[#f4efe9] hover:text-[#c9b293] border-b border-[#282622]"
+                className="py-2 text-xs font-sans uppercase tracking-wider text-[#f4efe9] hover:text-[#c9b293] border-b border-[#282622]"
               >
                 Atelier Story
               </Link>
@@ -203,7 +243,7 @@ export function SiteHeader() {
                   setMobileMenuOpen(false)
                   setIsProvenanceModalOpen(true)
                 }}
-                className="py-2.5 text-sm font-mono uppercase tracking-widest text-[#f4efe9] hover:text-[#c9b293] border-b border-[#282622] cursor-pointer"
+                className="py-2 text-xs font-sans uppercase tracking-wider text-[#f4efe9] hover:text-[#c9b293] border-b border-[#282622] cursor-pointer"
               >
                 Textile Provenance
               </button>
@@ -214,7 +254,7 @@ export function SiteHeader() {
                   setMobileMenuOpen(false)
                   setIsSalonModalOpen(true)
                 }}
-                className="py-2.5 text-sm font-mono uppercase tracking-widest text-[#f4efe9] hover:text-[#c9b293] border-b border-[#282622] cursor-pointer"
+                className="py-2 text-xs font-sans uppercase tracking-wider text-[#f4efe9] hover:text-[#c9b293] border-b border-[#282622] cursor-pointer"
               >
                 Salon Fitting Appointment
               </button>
@@ -225,9 +265,9 @@ export function SiteHeader() {
                   setMobileMenuOpen(false)
                   setIsStylistDrawerOpen(true)
                 }}
-                className="py-3 px-6 rounded-full bg-[#c9b293] text-[#181716] font-mono text-xs uppercase tracking-widest font-semibold flex items-center justify-center gap-2 mt-2 cursor-pointer"
+                className="py-2.5 px-5 rounded-full bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-sans text-xs font-medium flex items-center justify-center gap-2 mt-2 cursor-pointer shadow-sm"
               >
-                <Sparkles className="w-4 h-4" />
+                <Sparkles className="w-3.5 h-3.5" />
                 <span>VIP Stylist Concierge</span>
               </button>
             </div>

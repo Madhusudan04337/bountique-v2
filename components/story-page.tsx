@@ -46,7 +46,7 @@ export function StoryPage() {
         </div>
 
         <div className="relative z-10 max-w-3xl mx-auto text-center space-y-5">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#181716]/80 backdrop-blur-md border border-[#3b3832] text-[10px] font-mono uppercase tracking-[0.24em] text-[#c9b293]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#181716] border border-[#3b3832] text-[10px] font-sans font-medium uppercase tracking-wider text-[#c9b293]">
             <Sparkles className="w-3 h-3" />
             <span>Studio Philosophy &amp; Lineage</span>
           </div>
@@ -97,7 +97,7 @@ export function StoryPage() {
             <div className="pt-2">
               <Link
                 href="/collection"
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-mono text-xs uppercase tracking-wider font-semibold rounded-full transition-all duration-300 hover:scale-[1.02] shadow-lg"
+                className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-sans text-xs font-medium rounded-full transition-all duration-300 hover:scale-[1.02] shadow-md"
               >
                 <span>Explore The Wardrobe</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -123,7 +123,7 @@ export function StoryPage() {
             {milestones.map((m, i) => (
               <div
                 key={m.year}
-                className="p-6 sm:p-8 bg-[#201f1c]/90 border border-[#34322d] rounded-3xl grid grid-cols-1 sm:grid-cols-12 gap-6 items-center shadow-xl backdrop-blur-md"
+                className="p-6 sm:p-8 bg-[#201f1c] border border-[#34322d] rounded-3xl grid grid-cols-1 sm:grid-cols-12 gap-6 items-center shadow-xl"
               >
                 <div className="sm:col-span-2 text-3xl font-serif text-[#c9b293] font-medium">
                   {m.year}

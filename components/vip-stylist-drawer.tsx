@@ -200,10 +200,10 @@ export function VipStylistDrawer() {
 
                       <button
                         type="submit"
-                        className="w-full py-3.5 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-mono text-xs uppercase tracking-wider font-semibold rounded-full transition-colors flex items-center justify-center gap-2"
+                        className="w-full py-2.5 px-4 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-sans text-xs font-medium rounded-full transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer"
                       >
                         <Send className="w-3.5 h-3.5" />
-                        <span>Request VIP Styling Callback</span>
+                        <span>Request Callback</span>
                       </button>
                     </form>
                   )}

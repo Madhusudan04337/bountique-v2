@@ -43,9 +43,9 @@ export function ShopTheLookSection() {
   )
 
   const lookShortNames = [
-    { title: 'Coastal Tailoring', pieces: 'Blazer & Trousers', code: 'LOOK #01' },
-    { title: 'Atelier Evening', pieces: 'Silk Column & Wrap', code: 'LOOK #02' },
-    { title: 'Studio Terrace', pieces: 'Shirt & Midi Skirt', code: 'LOOK #03' }
+    { title: 'Coastal Tailoring', pieces: 'Blazer & Trousers' },
+    { title: 'Atelier Evening', pieces: 'Silk Column & Wrap' },
+    { title: 'Studio Terrace', pieces: 'Shirt & Midi Skirt' }
   ]
 
   const handleNextLook = () => {
@@ -87,20 +87,17 @@ export function ShopTheLookSection() {
 
   return (
     <section className="py-28 bg-[#191817] relative overflow-hidden" aria-labelledby="lookbook-heading">
-      {/* Organic Ambient Light Blob */}
-      <div className="absolute top-1/3 right-10 w-[550px] h-[550px] bg-[#c9b293]/6 rounded-full blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-[#c9b293]/4 rounded-full blur-[100px] pointer-events-none" />
-
+      {/* Subtle Ambient Vignette */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header with Lookbook Navigation */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 gap-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono uppercase tracking-[0.24em] text-[#c9b293] block">
+              <span className="text-[10px] font-sans font-medium uppercase tracking-wider text-[#c9b293] block">
                 Cycle 4 · Interactive Lookbook Canvas
               </span>
               <span className="w-1 h-1 rounded-full bg-[#c9b293]" />
-              <span className="text-[10px] font-mono text-[#8a857d]">
+              <span className="text-[10px] font-sans text-[#8a857d]">
                 Hotspot Micro-Interactions
               </span>
             </div>
@@ -112,43 +109,34 @@ export function ShopTheLookSection() {
             </p>
           </div>
 
-          {/* Look Switcher Tabs (Responsive Swipeable Track) */}
-          <div className="w-full sm:w-auto overflow-x-auto pb-1 scrollbar-none">
-            <div
-              className="flex flex-nowrap gap-1.5 sm:gap-2 p-1.5 bg-[#201f1c] rounded-full border border-[#36342e] w-fit shadow-xl relative z-20 shrink-0"
-              role="tablist"
-              aria-label="Lookbook Outfits"
-            >
-              {styledLooks.map((look, idx) => {
-                const isActive = activeLookIndex === idx
-                const shortInfo = lookShortNames[idx] || { title: `Look 0${idx + 1}`, pieces: '', code: `LOOK #0${idx + 1}` }
+          {/* Look Switcher Tabs */}
+          <div className="flex flex-wrap sm:flex-nowrap gap-1.5 sm:gap-2 p-1.5 bg-[#201f1c] rounded-2xl sm:rounded-full border border-[#36342e] shadow-xl relative z-20 self-start lg:self-auto">
+            {styledLooks.map((look, idx) => {
+              const isActive = activeLookIndex === idx
+              const shortInfo = lookShortNames[idx] || { title: `Look 0${idx + 1}`, pieces: '' }
 
-                return (
-                  <button
-                    key={look.id}
-                    type="button"
-                    role="tab"
-                    aria-selected={isActive}
-                    onClick={() => {
-                      setActiveLookIndex(idx)
-                      setActiveHotspot(null)
-                      setIsZoomed(false)
-                    }}
-                    className={`px-3.5 sm:px-5 py-2 sm:py-2.5 text-xs font-mono rounded-full transition-all cursor-pointer flex items-center gap-1.5 sm:gap-2 select-none shrink-0 ${
-                      isActive
-                        ? 'border-[#c9b293] bg-[#c9b293] text-[#181716] font-semibold shadow-[0_0_20px_rgba(201,178,147,0.35)] scale-[1.02]'
-                        : 'border-transparent text-[#a7a297] hover:text-white hover:bg-[#282723]'
-                    }`}
-                  >
-                    <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-[#181716]' : 'bg-[#c9b293]'}`} />
-                    <span className="font-semibold tracking-wider">{shortInfo.code}</span>
-                    <span className={`hidden md:inline text-[11px] font-normal ${isActive ? 'text-[#181716]' : 'text-[#7e7970]'}`}>
-                      · {shortInfo.title}
-                    </span>
-                  </button>
-                )
-              })}
-            </div>
+              return (
+                <button
+                  key={look.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => {
+                    setActiveLookIndex(idx)
+                    setActiveHotspot(null)
+                    setIsZoomed(false)
+                  }}
+                  className={`px-3.5 sm:px-4.5 py-1.5 sm:py-2 text-xs font-sans rounded-xl sm:rounded-full transition-all cursor-pointer flex items-center gap-1.5 select-none shrink-0 ${
+                    isActive
+                      ? 'border-[#c9b293] bg-[#c9b293] text-[#181716] font-medium shadow-md'
+                      : 'border-transparent text-[#a7a297] hover:text-white hover:bg-[#282622]'
+                  }`}
+                >
+                  <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-[#181716]' : 'bg-[#c9b293]'}`} />
+                  <span className="font-medium tracking-normal">{shortInfo.title}</span>
+                </button>
+              )
+            })}
           </div>
         </div>
 
@@ -188,9 +176,9 @@ export function ShopTheLookSection() {
 
             {/* Look Active Header Overlay */}
             <div className="absolute top-6 left-6 flex items-center gap-2.5 z-10">
-              <div className="flex items-center gap-2 px-3.5 py-1.5 bg-[#181716]/90 backdrop-blur-md rounded-full border border-[#3d3a33] text-[10px] font-mono uppercase tracking-widest text-[#c9b293] shadow-lg">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#55e08b] animate-pulse" />
-                <span>Look 0{activeLookIndex + 1} of 03 · {currentLook.title}</span>
+              <div className="flex items-center gap-2 px-3.5 py-1.5 bg-[#181716]/95 rounded-full border border-[#3d3a33] text-[11px] font-sans font-medium text-[#c9b293] shadow-lg">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#55e08b]" />
+                <span>{currentLook.title}</span>
               </div>
             </div>
 
@@ -200,16 +188,16 @@ export function ShopTheLookSection() {
               <button
                 type="button"
                 onClick={() => setShowHotspots(!showHotspots)}
-                className={`p-2 sm:px-3 sm:py-1.5 rounded-full border text-xs font-mono flex items-center gap-1.5 backdrop-blur-md transition-all shadow-md cursor-pointer ${
+                className={`p-2 sm:px-3 sm:py-1.5 rounded-full border text-xs font-sans font-medium flex items-center gap-1.5 transition-all shadow-md cursor-pointer ${
                   showHotspots
-                    ? 'bg-[#22211e]/90 border-[#c9b293] text-[#c9b293]'
-                    : 'bg-[#181716]/80 border-[#38352f] text-[#8a857d] hover:text-white'
+                    ? 'bg-[#22211e] border-[#c9b293] text-[#c9b293]'
+                    : 'bg-[#181716] border-[#38352f] text-[#8a857d] hover:text-white'
                 }`}
                 title={showHotspots ? 'Hide interactive pins' : 'Show interactive pins'}
               >
                 {showHotspots ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-                <span className="hidden sm:inline text-[10px] uppercase tracking-wider">
-                  {showHotspots ? 'Pins Active' : 'Pure Photo'}
+                <span className="hidden sm:inline text-xs">
+                  {showHotspots ? 'Pins' : 'Clean'}
                 </span>
               </button>
 
@@ -217,16 +205,16 @@ export function ShopTheLookSection() {
               <button
                 type="button"
                 onClick={() => setIsZoomed(!isZoomed)}
-                className={`p-2 sm:px-3 sm:py-1.5 rounded-full border text-xs font-mono flex items-center gap-1.5 backdrop-blur-md transition-all shadow-md cursor-pointer ${
+                className={`p-2 sm:px-3 sm:py-1.5 rounded-full border text-xs font-sans font-medium flex items-center gap-1.5 transition-all shadow-md cursor-pointer ${
                   isZoomed
-                    ? 'bg-[#c9b293] border-[#c9b293] text-[#181716] font-semibold'
-                    : 'bg-[#181716]/80 border-[#38352f] text-[#8a857d] hover:text-white'
+                    ? 'bg-[#c9b293] border-[#c9b293] text-[#181716] font-medium'
+                    : 'bg-[#181716] border-[#38352f] text-[#8a857d] hover:text-white'
                 }`}
                 title={isZoomed ? 'Reset zoom' : 'Inspect fabric & drape zoom'}
               >
                 {isZoomed ? <ZoomOut className="w-3.5 h-3.5" /> : <ZoomIn className="w-3.5 h-3.5" />}
-                <span className="hidden sm:inline text-[10px] uppercase tracking-wider">
-                  {isZoomed ? 'Reset' : 'Zoom Drape'}
+                <span className="hidden sm:inline text-xs">
+                  {isZoomed ? 'Reset' : 'Zoom'}
                 </span>
               </button>
             </div>
@@ -235,7 +223,7 @@ export function ShopTheLookSection() {
             <button
               type="button"
               onClick={handlePrevLook}
-              className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-[#181716]/75 hover:bg-[#181716] border border-[#38352f] hover:border-[#c9b293] text-[#cfcac2] hover:text-white backdrop-blur-md transition-all z-10 cursor-pointer shadow-lg"
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-[#181716]/90 hover:bg-[#181716] border border-[#38352f] hover:border-[#c9b293] text-[#cfcac2] hover:text-white transition-all z-10 cursor-pointer shadow-lg"
               aria-label="Previous look"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -243,20 +231,20 @@ export function ShopTheLookSection() {
             <button
               type="button"
               onClick={handleNextLook}
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-[#181716]/75 hover:bg-[#181716] border border-[#38352f] hover:border-[#c9b293] text-[#cfcac2] hover:text-white backdrop-blur-md transition-all z-10 cursor-pointer shadow-lg"
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-[#181716]/90 hover:bg-[#181716] border border-[#38352f] hover:border-[#c9b293] text-[#cfcac2] hover:text-white transition-all z-10 cursor-pointer shadow-lg"
               aria-label="Next look"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
 
             {/* Bottom Hint Ribbon */}
-            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between text-[10px] font-mono text-[#a7a297] pointer-events-none z-10">
-              <div className="flex items-center gap-1.5 px-3 py-1 bg-[#181716]/85 backdrop-blur-md rounded-full border border-[#33312c]">
-                <Sparkles className="w-3 h-3 text-[#c9b293]" />
-                <span>Tap any gold pin to inspect craft details or select sizes</span>
+            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between text-xs font-sans text-[#a7a297] pointer-events-none z-10">
+              <div className="flex items-center gap-1.5 px-3 py-1 bg-[#181716]/95 rounded-full border border-[#33312c]">
+                <Sparkles className="w-3.5 h-3.5 text-[#c9b293]" />
+                <span>Tap pin to inspect details</span>
               </div>
-              <span className="hidden sm:inline px-3 py-1 bg-[#181716]/85 backdrop-blur-md rounded-full border border-[#33312c] text-[#8a857d]">
-                100% Raw Fiber Atelier Tailoring
+              <span className="hidden sm:inline px-3 py-1 bg-[#181716]/95 rounded-full border border-[#33312c] text-[#8a857d]">
+                Atelier Handcrafted Edition
               </span>
             </div>
 
@@ -298,7 +286,7 @@ export function ShopTheLookSection() {
                         />
 
                         {/* Outer Glow Halo */}
-                        <span className="absolute -inset-1 rounded-full bg-[#c9b293]/40 blur-xs" />
+                        <span className="absolute -inset-1 rounded-full bg-[#c9b293]/40" />
 
                         {/* Gold Jewel Core Pin */}
                         <span className="relative flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-[#dfcaa8] to-[#9c8466] text-[#181716] shadow-2xl font-mono text-sm font-bold border border-white/50">
@@ -315,10 +303,10 @@ export function ShopTheLookSection() {
                               : 'opacity-85 sm:opacity-90 group-hover:opacity-100 group-hover:translate-x-0.5'
                           }`}
                         >
-                          <div className="px-2.5 py-1 bg-[#181716]/90 border border-[#3d3a33] text-[9px] font-mono text-[#f4efe9] rounded-full backdrop-blur-md shadow-lg flex items-center gap-1.5">
-                            <span className="w-1 h-1 rounded-full bg-[#c9b293]" />
+                          <div className="px-2.5 py-1 bg-[#181716]/95 border border-[#3d3a33] text-xs font-sans text-[#f4efe9] rounded-full shadow-lg flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#c9b293]" />
                             <span>{hotspot.productName}</span>
-                            <span className="text-[#c9b293] font-semibold">{formatMoney(hotspot.price)}</span>
+                            <span className="text-[#c9b293] font-medium">{formatMoney(hotspot.price)}</span>
                           </div>
                         </div>
                       )}
@@ -331,7 +319,7 @@ export function ShopTheLookSection() {
                           exit={{ opacity: 0, scale: 0.9, y: 8 }}
                           transition={{ duration: 0.2 }}
                           onClick={(e) => e.stopPropagation()}
-                          className="absolute left-2 sm:left-8 -top-16 w-64 sm:w-72 max-w-[80vw] p-3.5 sm:p-4 bg-[#1b1a18]/95 border border-[#444038] backdrop-blur-xl rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-40"
+                          className="absolute left-2 sm:left-8 -top-16 w-64 sm:w-72 max-w-[80vw] p-3.5 sm:p-4 bg-[#1b1a18] border border-[#444038] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-40"
                         >
                           {/* Card Header with Close Icon */}
                           <div className="flex justify-between items-start mb-3">
@@ -409,11 +397,11 @@ export function ShopTheLookSection() {
                           </div>
 
                           {/* Action Buttons */}
-                          <div className="flex gap-2">
+                          <div className="flex gap-1.5 sm:gap-2">
                             <button
                               type="button"
                               onClick={() => handleAddHotspotToCart(product)}
-                              className={`flex-1 py-2 px-3 text-[10px] font-mono uppercase tracking-wider font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-md ${
+                              className={`flex-1 py-2 px-3 text-xs font-sans font-medium rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-sm ${
                                 isJustAdded
                                   ? 'bg-[#55e08b] text-[#181716]'
                                   : 'bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716]'
@@ -422,21 +410,21 @@ export function ShopTheLookSection() {
                               {isJustAdded ? (
                                 <>
                                   <Check className="w-3 h-3" />
-                                  <span>Added to Bag</span>
+                                  <span>Added</span>
                                 </>
                               ) : (
                                 <>
                                   <ShoppingBag className="w-3 h-3" />
-                                  <span>Add Piece ({selectedSize})</span>
+                                  <span>Add to Bag</span>
                                 </>
                               )}
                             </button>
 
                             <Link
                               href={`/product/${product.slug}`}
-                              className="py-2 px-3 bg-[#24231f] hover:bg-[#2e2d27] text-[#cfcac2] hover:text-white text-[10px] font-mono uppercase tracking-wider rounded-xl border border-[#38352f] transition-colors flex items-center justify-center"
+                              className="py-2 px-3 bg-[#24231f] hover:bg-[#2e2d27] text-[#cfcac2] hover:text-white text-xs font-sans font-medium rounded-xl border border-[#38352f] transition-colors flex items-center justify-center"
                             >
-                              Specs →
+                              Specs
                             </Link>
                           </div>
                         </motion.div>
@@ -452,11 +440,8 @@ export function ShopTheLookSection() {
           <div className="lg:col-span-5 space-y-6">
             <div>
               <div className="flex items-center gap-2 mb-1.5">
-                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#c9b293] block">
+                <span className="text-xs font-sans font-medium uppercase tracking-wider text-[#c9b293] block">
                   The Coordinated Ensemble
-                </span>
-                <span className="text-[10px] font-mono text-[#8a857d]">
-                  · Look 0{activeLookIndex + 1}
                 </span>
               </div>
               <h3 className="text-3xl sm:text-4xl font-serif text-[#f4efe9]">
@@ -469,9 +454,9 @@ export function ShopTheLookSection() {
 
             {/* List of Pieces in this Look with Bidirectional Hover Highlight */}
             <div className="space-y-3">
-              <div className="flex justify-between items-center text-[10px] font-mono uppercase tracking-wider text-[#8a857d]">
+              <div className="flex justify-between items-center text-xs font-sans text-[#8a857d]">
                 <span>Garments in this Look ({bundledProducts.length} Pieces)</span>
-                <span>Hover card to locate pin</span>
+                <span className="hidden sm:inline">Tap card to locate</span>
               </div>
 
               {bundledProducts.map(item => {
@@ -512,15 +497,15 @@ export function ShopTheLookSection() {
                               <span className="w-1.5 h-1.5 rounded-full bg-[#c9b293]" />
                             )}
                           </h4>
-                          <p className="text-[11px] font-mono text-[#8a857d]">{item.fabric}</p>
-                          <span className="text-[10px] font-mono text-[#c9b293] mt-0.5 block">
+                          <p className="text-xs font-sans text-[#8a857d]">{item.fabric}</p>
+                          <span className="text-[11px] font-sans text-[#c9b293] mt-0.5 block">
                             {item.origin}
                           </span>
                         </div>
                       </div>
 
                       <div className="text-right">
-                        <span className="text-xs font-mono text-white block font-semibold">
+                        <span className="text-xs font-mono text-white block font-medium">
                           {formatMoney(item.price)}
                         </span>
                         <button
@@ -529,16 +514,16 @@ export function ShopTheLookSection() {
                             e.stopPropagation()
                             addToCart(item, currentChosenSize, item.color, 1)
                           }}
-                          className="text-[10px] font-mono text-[#c9b293] hover:underline cursor-pointer mt-1 block"
+                          className="text-xs font-sans font-medium text-[#c9b293] hover:underline cursor-pointer mt-1 block"
                         >
-                          + Add piece
+                          Add to Bag
                         </button>
                       </div>
                     </div>
 
                     {/* Integrated Size Selection for Bundle */}
-                    <div className="flex items-center justify-between pt-2 border-t border-[#2e2c27] text-[10px] font-mono">
-                      <span className="text-[#8a857d]">Ensemble Size:</span>
+                    <div className="flex items-center justify-between pt-2 border-t border-[#2e2c27] text-xs font-sans">
+                      <span className="text-[#8a857d]">Size:</span>
                       <div className="flex gap-1">
                         {item.sizes.map((sz) => (
                           <button
@@ -548,9 +533,9 @@ export function ShopTheLookSection() {
                               e.stopPropagation()
                               handleBundleSizeSelect(item.id, sz)
                             }}
-                            className={`px-2 py-0.5 rounded-md border text-[9px] transition-all cursor-pointer ${
+                            className={`px-2 py-0.5 rounded-md border text-xs font-sans transition-all cursor-pointer ${
                               currentChosenSize === sz
-                                ? 'bg-[#c9b293] text-[#181716] border-[#c9b293] font-bold'
+                                ? 'bg-[#c9b293] text-[#181716] border-[#c9b293] font-medium'
                                 : 'bg-[#181716] text-[#8a857d] border-[#302e29] hover:text-white'
                             }`}
                           >
@@ -567,11 +552,11 @@ export function ShopTheLookSection() {
             {/* Bundle Complete Look Card */}
             <div className="p-5 bg-gradient-to-br from-[#24231f] to-[#1c1b19] border border-[#c9b293]/40 rounded-2xl space-y-3.5 shadow-xl">
               <div className="flex justify-between items-baseline">
-                <span className="text-xs font-mono uppercase tracking-wider text-[#c9b293] flex items-center gap-1.5">
+                <span className="text-xs font-sans uppercase tracking-wider text-[#c9b293] flex items-center gap-1.5 font-medium">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>Coordinated Ensemble Privilege</span>
+                  <span>Curated Ensemble</span>
                 </span>
-                <span className="text-[10px] font-mono text-[#c9b293] bg-[#c9b293]/10 px-2 py-0.5 rounded-full border border-[#c9b293]/20">
+                <span className="text-xs font-sans font-medium text-[#c9b293] bg-[#c9b293]/10 px-2 py-0.5 rounded-full border border-[#c9b293]/20">
                   {currentLook.bundleDiscountPercent}% Privilege Applied
                 </span>
               </div>
@@ -585,7 +570,7 @@ export function ShopTheLookSection() {
                     {formatMoney(bundleOriginalTotal)}
                   </span>
                 )}
-                <span className="text-xs font-mono text-[#8a857d] ml-auto">
+                <span className="text-xs font-sans text-[#8a857d] ml-auto">
                   Save {formatMoney(bundleOriginalTotal - bundleDiscountedTotal)}
                 </span>
               </div>
@@ -598,14 +583,12 @@ export function ShopTheLookSection() {
                 icon={justAddedBundle ? Check : ShoppingBag}
                 iconPosition="left"
               >
-                {justAddedBundle
-                  ? 'Ensemble Added to Bag! (LOOK10)'
-                  : `Add Complete Look (${bundledProducts.length} Pieces)`}
+                {justAddedBundle ? 'Added to Bag' : 'Add Ensemble to Bag'}
               </AtelierButton>
 
-              <div className="flex justify-between items-center text-[10px] font-mono text-[#8a857d] pt-1">
-                <span>Includes Cedarwood Box &amp; Linen Dust Cover</span>
-                <span className="text-[#c9b293]">Promo Code: LOOK10</span>
+              <div className="flex justify-between items-center text-xs font-sans text-[#8a857d] pt-1">
+                <span>Includes Cedarwood Box</span>
+                <span className="text-[#c9b293]">Code: LOOK10</span>
               </div>
             </div>
           </div>

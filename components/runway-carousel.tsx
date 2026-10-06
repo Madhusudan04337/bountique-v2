@@ -139,7 +139,7 @@ export function RunwayCarousel() {
                   </Link>
 
                   <div className="absolute top-4 left-4 flex flex-col gap-1 z-10 pointer-events-none">
-                    <span className="px-2.5 py-0.5 bg-[#181716]/85 backdrop-blur-md border border-[#38352f] text-[9px] font-mono uppercase tracking-widest text-[#c9b293] rounded-full">
+                    <span className="px-2.5 py-0.5 bg-[#181716] border border-[#38352f] text-[10px] font-sans font-medium uppercase tracking-wider text-[#c9b293] rounded-full">
                       {product.category}
                     </span>
                   </div>

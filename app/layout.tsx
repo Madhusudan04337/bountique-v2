@@ -4,16 +4,7 @@ import './globals.css'
 import { MotionConfig } from 'motion/react'
 import { StoreProvider } from '@/lib/store'
 import { SmoothScrollProvider } from '@/components/smooth-scroll-provider'
-import { SiteHeader } from '@/components/site-header'
-import { CartDrawer } from '@/components/cart-drawer'
-import { SearchModal } from '@/components/search-modal'
-import { ToastNotification } from '@/components/toast-notification'
-import { SalonBookingModal } from '@/components/salon-booking-modal'
-import { ProvenanceModal } from '@/components/provenance-modal'
-import { VipStylistDrawer } from '@/components/vip-stylist-drawer'
-import { FloatingVipStylist } from '@/components/floating-vip-stylist'
-import { MobileNav } from '@/components/mobile-nav'
-import { SiteFooter } from '@/components/site-footer'
+import { LayoutShell } from '@/components/layout-shell'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -79,17 +70,7 @@ export default function RootLayout({
         <MotionConfig reducedMotion="user">
           <StoreProvider>
             <SmoothScrollProvider>
-              <SiteHeader />
-              <CartDrawer />
-              <SearchModal />
-              <SalonBookingModal />
-              <ProvenanceModal />
-              <VipStylistDrawer />
-              <FloatingVipStylist />
-              <ToastNotification />
-              <div className="flex-1 pb-16 md:pb-0">{children}</div>
-              <MobileNav />
-              <SiteFooter />
+              <LayoutShell>{children}</LayoutShell>
             </SmoothScrollProvider>
           </StoreProvider>
         </MotionConfig>

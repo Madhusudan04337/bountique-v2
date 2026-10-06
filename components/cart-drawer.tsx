@@ -209,10 +209,10 @@ export function CartDrawer() {
                   <Link
                     href="/checkout"
                     onClick={() => setIsCartOpen(false)}
-                    className="w-full py-3.5 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-mono text-xs uppercase tracking-wider font-semibold flex items-center justify-between px-4 transition-colors rounded-full"
+                    className="w-full py-2.5 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-sans text-xs font-medium flex items-center justify-between px-5 transition-colors rounded-full shadow-sm"
                   >
                     <span>Proceed to Checkout</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               )}

@@ -30,21 +30,21 @@ export function AtelierButton({
   disabled,
   ...props
 }: ButtonProps) {
-  const baseClasses = 'inline-flex items-center justify-center font-mono uppercase tracking-[0.14em] font-semibold transition-all duration-200 rounded-full cursor-pointer select-none whitespace-nowrap active:scale-[0.98]'
+  const baseClasses = 'inline-flex items-center justify-center font-sans tracking-wide font-medium transition-all duration-200 rounded-full cursor-pointer select-none whitespace-nowrap active:scale-[0.98]'
 
   const sizeClasses = {
-    xs: 'text-[9px] h-7 px-2.5 gap-1',
-    sm: 'text-[10px] sm:text-[11px] h-8 sm:h-9 px-3.5 gap-1.5',
-    md: 'text-xs h-10 sm:h-11 px-4 sm:px-5 gap-2',
-    lg: 'text-xs sm:text-sm h-11 sm:h-12 px-6 sm:px-7 gap-2'
+    xs: 'text-[10px] h-7 px-3 gap-1',
+    sm: 'text-xs h-8 px-3.5 gap-1.5',
+    md: 'text-xs h-9 px-4.5 gap-2',
+    lg: 'text-xs sm:text-sm h-10 px-5 sm:px-6 gap-2'
   }[size]
 
   const variantClasses = {
-    primary: 'bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] shadow-md hover:shadow-[0_4px_20px_rgba(201,178,147,0.25)]',
+    primary: 'bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] shadow-sm hover:shadow-[0_4px_16px_rgba(201,178,147,0.2)]',
     secondary: 'bg-[#24221f] hover:bg-[#2e2b26] text-[#f4efe9] border border-[#3b3832] hover:border-[#c9b293] shadow-sm',
     outline: 'bg-transparent hover:bg-[#201f1c] text-[#f4efe9] border border-[#3d3a33] hover:border-[#c9b293]',
     ghost: 'bg-transparent hover:bg-[#252320]/60 text-[#c9b293] hover:text-[#dfcaa8]',
-    glass: 'bg-[#181716]/85 hover:bg-[#22201d] text-[#f4efe9] border border-[#3b3832] hover:border-[#c9b293] backdrop-blur-md shadow-sm',
+    glass: 'bg-[#181716] hover:bg-[#22201d] text-[#f4efe9] border border-[#3b3832] hover:border-[#c9b293] shadow-sm',
     dark: 'bg-[#181716] hover:bg-[#22201d] text-[#f4efe9] border border-[#33312c]'
   }[variant]
 
@@ -54,9 +54,9 @@ export function AtelierButton({
   if (href) {
     return (
       <Link href={href} className={combinedClasses}>
-        {Icon && iconPosition === 'left' && <Icon className="w-3.5 h-3.5 shrink-0" />}
+        {Icon && iconPosition === 'left' && <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />}
         <span>{children}</span>
-        {Icon && iconPosition === 'right' && <Icon className="w-3.5 h-3.5 shrink-0" />}
+        {Icon && iconPosition === 'right' && <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />}
       </Link>
     )
   }
@@ -68,9 +68,9 @@ export function AtelierButton({
       disabled={disabled}
       {...(props as any)}
     >
-      {Icon && iconPosition === 'left' && <Icon className="w-3.5 h-3.5 shrink-0" />}
+      {Icon && iconPosition === 'left' && <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />}
       <span>{children}</span>
-      {Icon && iconPosition === 'right' && <Icon className="w-3.5 h-3.5 shrink-0" />}
+      {Icon && iconPosition === 'right' && <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />}
     </motion.button>
   )
 }
@@ -96,9 +96,9 @@ export function AtelierIconButton({
   ...props
 }: IconButtonProps) {
   const sizeClasses = {
-    sm: 'w-7 h-7 sm:w-8 sm:h-8 p-1.5',
-    md: 'w-9 h-9 sm:w-10 sm:h-10 p-2 sm:p-2.5',
-    lg: 'w-11 h-11 sm:w-12 sm:h-12 p-3'
+    sm: 'w-7 h-7 sm:w-8 sm:h-8 p-1',
+    md: 'w-8.5 h-8.5 sm:w-9.5 sm:h-9.5 p-1.5',
+    lg: 'w-10 h-10 sm:w-11 sm:h-11 p-2'
   }[size]
 
   const iconSizes = {
@@ -110,7 +110,7 @@ export function AtelierIconButton({
   const variantClasses = {
     glass: active
       ? 'bg-[#c9b293] text-[#181716] border-[#c9b293] shadow-md'
-      : 'bg-[#181716]/85 text-[#a7a297] hover:text-white border-[#38352f] hover:border-[#c9b293] backdrop-blur-md',
+      : 'bg-[#181716] text-[#a7a297] hover:text-white border-[#38352f] hover:border-[#c9b293]',
     primary: 'bg-[#c9b293] text-[#181716] border-transparent hover:bg-[#dfcaa8]',
     outline: 'bg-transparent text-[#a7a297] hover:text-white border-[#38352f] hover:border-[#c9b293]',
     subtle: 'bg-[#22201d] text-[#a7a297] hover:text-white border-[#33312c] hover:border-[#c9b293]'
@@ -146,15 +146,15 @@ export function AtelierBadge({
   className = ''
 }: BadgeProps) {
   const variantStyles = {
-    gold: 'bg-[#1e1c19]/90 border-[#c9b293]/40 text-[#c9b293]',
-    subtle: 'bg-[#181716]/85 border-[#38352f] text-[#a7a297]',
-    scarcity: 'bg-[#2a1e17]/90 border-[#8a4e32]/60 text-[#e89069]',
-    emerald: 'bg-[#16241b]/90 border-[#326941]/60 text-[#55e08b]',
+    gold: 'bg-[#1e1c19] border-[#c9b293]/40 text-[#c9b293]',
+    subtle: 'bg-[#181716] border-[#38352f] text-[#a7a297]',
+    scarcity: 'bg-[#2a1e17] border-[#8a4e32]/60 text-[#e89069]',
+    emerald: 'bg-[#16241b] border-[#326941]/60 text-[#55e08b]',
     mono: 'bg-[#201f1c] border-[#38352f] text-[#f4efe9]'
   }[variant]
 
   return (
-    <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.14em] backdrop-blur-md shadow-sm whitespace-nowrap ${variantStyles} ${className}`}>
+    <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border text-[10px] font-sans font-medium uppercase tracking-wider shadow-sm whitespace-nowrap ${variantStyles} ${className}`}>
       {Icon && <Icon className="w-3 h-3 shrink-0" />}
       <span>{children}</span>
     </span>

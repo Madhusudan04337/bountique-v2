@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { Check, Mail, Phone, MapPin, Sparkles, ArrowRight } from 'lucide-react'
+import { Check, Mail, Phone, MapPin, Sparkles, ArrowRight, Send } from 'lucide-react'
 import { useStore } from '@/lib/store'
 
 export function ContactPage() {
@@ -99,9 +99,10 @@ export function ContactPage() {
 
                 <button
                   type="submit"
-                  className="w-full py-4 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-mono text-xs font-semibold uppercase tracking-[0.2em] rounded-full transition-all duration-300 hover:scale-[1.01] shadow-lg cursor-pointer"
+                  className="w-full py-2.5 sm:py-3.5 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] rounded-full transition-all duration-300 hover:scale-[1.01] shadow-lg cursor-pointer flex items-center justify-center gap-1.5"
                 >
-                  Send Inquiry Note
+                  <Send className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                  <span>Send Inquiry Note</span>
                 </button>
               </form>
             )}

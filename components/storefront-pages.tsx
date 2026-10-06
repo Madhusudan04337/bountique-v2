@@ -122,7 +122,8 @@ function CollectionPageContent({ arrivalsOnly = false }: { arrivalsOnly?: boolea
             <ChevronDown className="w-3.5 h-3.5" />
           </button>
 
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 scrollbar-none">
+          {/* Category Tabs: Hidden on mobile (filters used instead), visible on desktop */}
+          <div className="hidden md:flex items-center gap-1.5 overflow-x-auto pb-0.5 scrollbar-none">
             {categories.map(cat => (
               <FilterPill
                 key={cat}
@@ -316,12 +317,12 @@ function CollectionPageContent({ arrivalsOnly = false }: { arrivalsOnly?: boolea
                   </div>
                 </div>
 
-                <div className="pt-6 border-t border-[#302e2a]">
+                <div className="pt-5 border-t border-[#302e2a]">
                   <button
                     onClick={() => setDrawerOpen(false)}
-                    className="w-full py-3 bg-[#c9b293] text-[#181716] font-mono text-xs uppercase tracking-widest font-semibold rounded-full"
+                    className="w-full py-2.5 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-sans text-xs font-medium rounded-full flex items-center justify-center transition-colors cursor-pointer shadow-sm"
                   >
-                    View Results ({filteredProducts.length})
+                    <span>Apply Filters</span>
                   </button>
                 </div>
               </motion.div>
@@ -556,10 +557,10 @@ function ProductPageInner({ slug }: { slug?: string }) {
                   e.stopPropagation()
                   setShowZoomModal(true)
                 }}
-                className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 p-2 sm:p-2.5 bg-[#181716]/85 hover:bg-[#c9b293] hover:text-[#181716] border border-[#38352f] text-xs font-mono text-white rounded-full backdrop-blur-md transition-colors flex items-center gap-1.5 cursor-pointer"
+                className="absolute bottom-3 right-3 sm:bottom-5 sm:right-5 p-1.5 sm:p-2.5 bg-[#181716]/85 hover:bg-[#c9b293] hover:text-[#181716] border border-[#38352f] text-[9.5px] sm:text-xs font-mono text-white rounded-full backdrop-blur-md transition-colors flex items-center gap-1 sm:gap-1.5 cursor-pointer"
               >
-                <ZoomIn className="w-3.5 h-3.5" />
-                <span className="text-[10px] uppercase tracking-wider">Inspect Weave</span>
+                <ZoomIn className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                <span className="text-[9px] sm:text-[10px] uppercase tracking-wider">Inspect Weave</span>
               </button>
             </div>
 
@@ -679,16 +680,16 @@ function ProductPageInner({ slug }: { slug?: string }) {
                     setIsCartOpen(true)
                   }}
                   variant="primary"
-                  size="lg"
+                  size="md"
                   fullWidth
                 >
-                  Add Size {selectedSize} to Bag
+                  Add to Bag
                 </AtelierButton>
 
                 <AtelierIconButton
                   icon={Heart}
                   variant="glass"
-                  size="lg"
+                  size="md"
                   active={wishlisted}
                   onClick={() => toggleWishlist(product.id)}
                   label={wishlisted ? 'Remove from wishlist' : 'Save to wishlist'}
@@ -699,13 +700,13 @@ function ProductPageInner({ slug }: { slug?: string }) {
               <button
                 type="button"
                 onClick={() => setIsStylistDrawerOpen(true)}
-                className="w-full py-2.5 px-4 bg-[#23211e] hover:bg-[#2c2a25] border border-[#38352f] text-xs font-mono text-[#c9b293] rounded-full flex items-center justify-between transition-colors cursor-pointer"
+                className="w-full py-2 px-3.5 bg-[#23211e] hover:bg-[#2c2a25] border border-[#38352f] text-xs font-sans font-medium text-[#c9b293] rounded-full flex items-center justify-between transition-colors cursor-pointer"
               >
-                <span className="flex items-center gap-2 truncate">
+                <span className="flex items-center gap-1.5 truncate">
                   <MessageSquare className="w-3.5 h-3.5 shrink-0" />
-                  <span>Unsure about proportions? Ask Stylist Ananya</span>
+                  <span>Sizing questions? Ask Stylist Ananya</span>
                 </span>
-                <span className="underline shrink-0">WhatsApp →</span>
+                <span className="underline shrink-0 text-[11px]">WhatsApp</span>
               </button>
             </div>
 
@@ -942,7 +943,7 @@ function ProductPageInner({ slug }: { slug?: string }) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.19, 1, 0.22, 1] }}
-            className="fixed bottom-0 inset-x-0 z-40 bg-[#1a1917]/95 backdrop-blur-lg border-t border-[#35332e] py-2.5 px-4 sm:px-6 shadow-[0_-10px_30px_rgba(0,0,0,0.6)]"
+            className="fixed bottom-0 inset-x-0 z-40 bg-[#1a1917] border-t border-[#35332e] py-2.5 px-4 sm:px-6 shadow-[0_-10px_30px_rgba(0,0,0,0.6)]"
           >
             <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
               <div className="flex items-center gap-2.5 min-w-0">
@@ -972,7 +973,7 @@ function ProductPageInner({ slug }: { slug?: string }) {
                 <select
                   value={selectedSize}
                   onChange={e => setSelectedSize(e.target.value)}
-                  className="p-2 bg-[#201f1c] border border-[#38352f] text-xs font-mono rounded-xl text-white focus:outline-none focus:border-[#c9b293]"
+                  className="p-2 bg-[#201f1c] border border-[#38352f] text-xs font-sans rounded-xl text-white focus:outline-none focus:border-[#c9b293]"
                 >
                   {product.sizes.map(s => (
                     <option key={s} value={s}>{s}</option>
@@ -987,7 +988,7 @@ function ProductPageInner({ slug }: { slug?: string }) {
                   variant="primary"
                   size="sm"
                 >
-                  Add {selectedSize}
+                  Add to Bag
                 </AtelierButton>
               </div>
             </div>
@@ -1228,12 +1229,12 @@ export function CartPage() {
 // ==========================================
 export function CheckoutPage() {
   const router = useRouter()
-  const { cart, cartSubtotal, discountAmount, clearCart, showToast } = useStore()
+  const { cart, cartSubtotal, discountAmount, clearCart, showToast, user } = useStore()
   const [step, setStep] = useState<'shipping' | 'payment' | 'complete'>('shipping')
   const [formData, setFormData] = useState({
-    name: 'Madhusudan',
-    email: 'madhusudan@aurora.com',
-    phone: '+91 98765 43210',
+    name: user ? `${user.firstName} ${user.lastName}` : 'Default User',
+    email: user ? user.email : 'user@aurora.com',
+    phone: user?.phone || '+91 98765 43210',
     address: '42, Khader Nawaz Khan Road, Nungambakkam',
     city: 'Chennai',
     state: 'Tamil Nadu',
@@ -1357,8 +1358,8 @@ export function CheckoutPage() {
                 </span>
                 <span className="text-[#55e08b]">Active</span>
               </div>
-              <AtelierButton type="submit" variant="primary" size="lg" fullWidth>
-                Confirm &amp; Place Order ({formatMoney(finalTotal)})
+              <AtelierButton type="submit" variant="primary" size="md" fullWidth>
+                Place Order
               </AtelierButton>
             </div>
           </form>

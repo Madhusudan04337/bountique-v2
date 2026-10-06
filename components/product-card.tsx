@@ -79,10 +79,10 @@ export function ProductCard({
         <button
           type="button"
           onClick={handleWishlistToggle}
-          className={`absolute top-2.5 right-2.5 sm:top-3 sm:right-3 w-7 h-7 sm:w-8 sm:h-8 rounded-full transition-all z-20 backdrop-blur-md flex items-center justify-center cursor-pointer ${
+          className={`absolute top-2.5 right-2.5 sm:top-3 sm:right-3 w-7 h-7 sm:w-8 sm:h-8 rounded-full transition-all z-20 flex items-center justify-center cursor-pointer ${
             wishlisted
               ? 'bg-[#c9b293] text-[#181716] shadow-md scale-105'
-              : 'bg-[#181716]/80 text-[#f4efe9] hover:text-[#c9b293] hover:border-[#c9b293] border border-[#38352f]'
+              : 'bg-[#181716] text-[#f4efe9] hover:text-[#c9b293] hover:border-[#c9b293] border border-[#38352f]'
           }`}
           aria-label={wishlisted ? `Remove ${product.name} from wishlist` : `Save ${product.name} to wishlist`}
         >
@@ -93,7 +93,7 @@ export function ProductCard({
         <div className="absolute inset-x-2.5 bottom-2.5 z-20">
           {showQuickAdd ? (
             <div
-              className="p-2 bg-[#181716]/95 border border-[#3d3a34] backdrop-blur-md rounded-xl shadow-xl animate-in fade-in duration-150"
+              className="p-2 bg-[#181716] border border-[#3d3a34] rounded-xl shadow-xl animate-in fade-in duration-150"
               onClick={e => e.stopPropagation()}
             >
               <div className="flex gap-1 mb-1.5">
@@ -102,9 +102,9 @@ export function ProductCard({
                     key={size}
                     type="button"
                     onClick={() => setSelectedSize(size)}
-                    className={`flex-1 py-0.5 text-[10px] font-mono rounded border transition-all cursor-pointer ${
+                    className={`flex-1 py-1 text-xs font-sans rounded border transition-all cursor-pointer ${
                       selectedSize === size
-                        ? 'border-[#c9b293] bg-[#c9b293] text-[#181716] font-semibold'
+                        ? 'border-[#c9b293] bg-[#c9b293] text-[#181716] font-medium'
                         : 'border-[#383530] bg-[#22201d] text-[#a7a299] hover:text-white'
                     }`}
                   >
@@ -115,15 +115,15 @@ export function ProductCard({
               <button
                 type="button"
                 onClick={handleQuickAdd}
-                className="w-full h-7 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-mono text-[9px] sm:text-[10px] uppercase tracking-wider font-semibold flex items-center justify-center gap-1 transition-colors rounded-lg shadow-sm cursor-pointer"
+                className="w-full h-8 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-sans text-xs font-medium flex items-center justify-center gap-1.5 transition-colors rounded-lg shadow-sm cursor-pointer"
               >
                 {justAdded ? (
                   <>
-                    <Check className="w-3 h-3" /> Added!
+                    <Check className="w-3 h-3" /> Added
                   </>
                 ) : (
                   <>
-                    <Plus className="w-3 h-3" /> Add Size {selectedSize}
+                    <Plus className="w-3 h-3" /> Add to Bag
                   </>
                 )}
               </button>
@@ -136,10 +136,10 @@ export function ProductCard({
                 e.stopPropagation()
                 setShowQuickAdd(true)
               }}
-              className="w-full h-7 sm:h-8 px-2.5 bg-[#181716]/90 hover:bg-[#c9b293] hover:text-[#181716] text-[#f4efe9] border border-[#3b3933] text-[9px] sm:text-[10px] font-mono uppercase tracking-wider flex items-center justify-center gap-1 transition-all rounded-full backdrop-blur-md shadow-md cursor-pointer opacity-90 sm:opacity-0 sm:group-hover:opacity-100"
+              className="w-full h-8 px-2.5 bg-[#181716] hover:bg-[#c9b293] hover:text-[#181716] text-[#f4efe9] border border-[#3b3933] text-xs font-sans font-medium flex items-center justify-center gap-1.5 transition-all rounded-full shadow-md cursor-pointer opacity-90 sm:opacity-0 sm:group-hover:opacity-100"
             >
               <Plus className="w-3 h-3" />
-              <span>Quick Bag</span>
+              <span>Quick Add</span>
             </button>
           )}
         </div>

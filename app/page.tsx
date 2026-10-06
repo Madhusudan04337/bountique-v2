@@ -67,7 +67,7 @@ export default function HomePage() {
       {/* 2. ATELIER COMMITMENTS & CLIENT PRIVILEGES (Compact 2x2 on Mobile / 4-Col on Desktop) */}
       <section className="relative bg-[#1a1917] py-8 sm:py-12 px-4 sm:px-6 lg:px-8 -mt-1" aria-label="Atelier Commitments">
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="relative rounded-2xl sm:rounded-[2.5rem] bg-gradient-to-r from-[#21201d]/90 via-[#252320]/80 to-[#21201d]/90 border border-[#36332d]/80 p-4 sm:p-6 lg:p-8 backdrop-blur-md shadow-2xl">
+          <div className="relative rounded-2xl sm:rounded-[2.5rem] bg-[#21201d] border border-[#36332d] p-4 sm:p-6 lg:p-8 shadow-2xl">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 lg:gap-8 lg:divide-x lg:divide-[#33312c]">
               <div className="flex flex-col sm:flex-row items-start gap-2.5 sm:gap-4 p-1.5 sm:p-2">
                 <span className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[#c9b293]/25 to-[#c9b293]/5 text-[#c9b293] border border-[#c9b293]/30 flex items-center justify-center shrink-0 text-[11px] sm:text-xs font-mono font-semibold shadow-inner">
@@ -170,16 +170,16 @@ export default function HomePage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#181716] via-[#181716]/20 to-transparent pointer-events-none" />
 
-                <div className="hidden sm:block absolute top-5 right-5 px-2.5 py-1 bg-[#181716]/85 backdrop-blur-md rounded-full border border-[#38352f] text-[9px] font-mono text-[#c9b293] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="hidden sm:block absolute top-5 right-5 px-2.5 py-1 bg-[#181716] rounded-full border border-[#38352f] text-[10px] font-sans font-medium text-[#c9b293] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   {pillar.accent}
                 </div>
 
                 <div className="absolute bottom-3.5 sm:bottom-5 left-3.5 sm:left-5 right-3.5 sm:right-5 text-white space-y-0.5 sm:space-y-1">
-                  <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-wider text-[#c9b293] block truncate">
+                  <span className="text-[10px] font-sans font-medium uppercase tracking-wider text-[#c9b293] block truncate">
                     {pillar.count}
                   </span>
                   <h3 className="text-base sm:text-xl font-serif">{pillar.name}</h3>
-                  <div className="hidden sm:flex pt-1 items-center gap-1 text-[10px] font-mono text-[#a7a297] group-hover:text-white transition-colors">
+                  <div className="hidden sm:flex pt-1 items-center gap-1 text-xs font-sans text-[#a7a297] group-hover:text-white transition-colors">
                     <span>Explore silhouette</span>
                     <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -228,7 +228,7 @@ export default function HomePage() {
                 <button
                   type="button"
                   onClick={() => setIsProvenanceModalOpen(true)}
-                  className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#c9b293] group-hover:text-white transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-2 text-xs font-sans font-medium text-[#c9b293] group-hover:text-white transition-colors cursor-pointer"
                 >
                   <span className="border-b border-[#c9b293]/40 pb-0.5">Explore Textile Archives</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -258,7 +258,7 @@ export default function HomePage() {
                   icon={Calendar}
                   iconPosition="left"
                 >
-                  Reserve Fitting Appointment
+                  Reserve Fitting
                 </AtelierButton>
               </div>
             </OrganicCard>
@@ -288,16 +288,16 @@ export default function HomePage() {
                 Welcome to the circle. Privilege code: <strong>AURORA15</strong>
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2.5 pt-2 max-w-md mx-auto">
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2 sm:gap-2.5 pt-2 max-w-md mx-auto">
                 <input
                   type="email"
                   required
                   placeholder="Client email address"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
-                  className="flex-1 px-4 sm:px-5 py-3 sm:py-3.5 bg-[#181716] border border-[#38352f] text-white font-sans text-xs sm:text-sm focus:outline-none focus:border-[#c9b293] rounded-full placeholder:text-[#68645c]"
+                  className="flex-1 px-3.5 sm:px-5 py-2 sm:py-3.5 bg-[#181716] border border-[#38352f] text-white font-sans text-xs sm:text-sm focus:outline-none focus:border-[#c9b293] rounded-full placeholder:text-[#68645c]"
                 />
-                <AtelierButton type="submit" variant="primary" size="md">
+                <AtelierButton type="submit" variant="primary" size="sm">
                   Join Circle
                 </AtelierButton>
               </form>

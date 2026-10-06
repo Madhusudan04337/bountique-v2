@@ -196,9 +196,10 @@ export function SalonBookingModal() {
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-mono text-xs uppercase tracking-wider font-semibold rounded-lg transition-colors mt-2"
+                    className="w-full py-2 sm:py-3 bg-[#c9b293] hover:bg-[#dfcaa8] text-[#181716] font-mono text-[10px] sm:text-xs uppercase tracking-wider font-semibold rounded-lg transition-colors mt-2 flex items-center justify-center gap-1.5"
                   >
-                    Confirm Private Reservation
+                    <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                    <span>Confirm Private Reservation</span>
                   </button>
                 </form>
               )}

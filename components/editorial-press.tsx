@@ -71,7 +71,7 @@ export function EditorialPress() {
         </h2>
 
         {/* Quote Display in Curved Floating Portal */}
-        <div className="relative min-h-[180px] flex items-center justify-center p-6 sm:p-10 rounded-[3rem] bg-gradient-to-b from-[#1d1c1a]/80 via-[#181716]/60 to-[#1d1c1a]/80 border border-[#36332d] shadow-2xl backdrop-blur-sm">
+        <div className="relative min-h-[180px] flex items-center justify-center p-6 sm:p-10 rounded-[3rem] bg-[#1d1c1a] border border-[#36332d] shadow-2xl">
           <div
             key={current}
             className="space-y-5 max-w-2xl mx-auto animate-in fade-in duration-300"
